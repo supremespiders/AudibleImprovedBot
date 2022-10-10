@@ -1,5 +1,8 @@
 ﻿using airbnb.comLister.Models;
 using airbnb.comLister.Services;
+using AudibleImprovedBot.Models;
+using ExcelHelperExe;
+using Microsoft.Playwright;
 
 namespace AudibleImprovedBot.Services;
 
@@ -11,6 +14,10 @@ public class Scraper
     private int _completed;
     private bool _loopFiles;
     private int _delayBetweenfiles;
+    private  List<AudibleService> _audibleServices=new ();
+    protected IPlaywright _playwright;
+    protected List<IPage> _pages;
+    protected IBrowser _browser;
     async Task WaitForScheduledDate()
     {
         if (_shouldRunAt)
@@ -24,9 +31,45 @@ public class Scraper
             await Task.Delay(toSleep);
         }
     }
+
+    public async Task StartBrowser()
+    {
+        if (_playwright != null) return;
+        _playwright = await Playwright.CreateAsync();
+        _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions()
+        {
+            Headless = false,
+            Proxy = new Proxy
+            {
+                Server = $"194.163.175.24:808",
+                Username = "user",
+                Password = "puser"
+            }
+        });
+    }
+    
+    public async Task Dispose()
+    {
+        if (_playwright == null) return;
+        // foreach (var p in _pages)
+        //     await p.Context.DisposeAsync();        
+        _playwright.Dispose();
+    }
     
     public async Task MainWork()
     {
+        await StartBrowser();
+        var inputs = "input.xlsx".ReadFromExcel<Input>();
+        _audibleServices.Add(new AudibleService(inputs[0],_browser));
+        //_audibleServices.Add(new AudibleService(inputs[1],_browser));
+        var t = new List<Task>();
+        foreach (var audibleService in _audibleServices)
+        {
+            t.Add(audibleService.Work());
+        }
+
+        await Task.WhenAll(t);
+        return;
         await WaitForScheduledDate();
 
         var files = Directory.GetFiles(_inputDir).ToList();
@@ -38,7 +81,7 @@ public class Scraper
                 var file = files[f];
                 Notifier.Display($"Working on input file {f + 1} / {files.Count} : {Path.GetFileName(file)}");
 
-                await WorkOneFile(file);
+               // await WorkOneFile(file);
 
                 if (_completed == files.Count)
                 {

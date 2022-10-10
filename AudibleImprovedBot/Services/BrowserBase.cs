@@ -1,63 +1,71 @@
-﻿using airbnb.comLister.Services;
+﻿using System.Diagnostics;
+using airbnb.comLister.Models;
+using airbnb.comLister.Services;
 using Microsoft.Playwright;
 
 namespace AudibleImprovedBot.Services;
 
 public class BrowserBase
 {
-    protected IPlaywright _playwright;
-    protected IBrowserContext _browser;
-    protected IBrowserContext _browser2;
-    protected IPage _page;
-    protected IPage _page2;
     protected readonly string _path = Application.StartupPath;
+    protected IPage p;
     
-    public async Task AttachToBrowser()
+    public async Task<IPage> StartContext(IBrowser browser, string proxy)
     {
-        Notifier.Display("Attaching Browser Engine");
-        _playwright = await Playwright.CreateAsync();
-        var b = await _playwright.Chromium.ConnectOverCDPAsync("http://localhost:9222", new BrowserTypeConnectOverCDPOptions() { Timeout = 3000 });
-        _browser = b.Contexts.First();
-        _page = _browser.Pages.FirstOrDefault(x => x.Url.StartsWith("https://www.airbnb.com/"));
-        if (_page == null)
-            _page = _browser.Pages.First();
-        Notifier.Display("Attached");
-    }
-    
-    public async Task StartBrowser(bool headless=false,bool persisted=false)
-    {
-        Notifier.Display("Starting browser");
-        _playwright = await Playwright.CreateAsync();
-        Directory.CreateDirectory("temp");
-        var userDataDir = $"{_path}/tmp";
-        if (persisted)
+        Notifier.Display("starting context");
+        var pr = proxy.Split(":");
+        var context = await browser.NewContextAsync(new BrowserNewContextOptions()
         {
-            _browser = await _playwright.Chromium.LaunchPersistentContextAsync(userDataDir, new BrowserTypeLaunchPersistentContextOptions()
+            Proxy = new Proxy()
             {
-                Headless = headless,
-                //  Args = new []{$"--disable-extensions-except={_path}/ext"} //$"--load-extension={_path}/ext", ,{_path}/ext2
-            });
-        }
-        else
-        {
-            var b = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions()
-            {
-                Headless = headless
-            });
-            _browser = await b.NewContextAsync(new BrowserNewContextOptions());
-        }
-      
-        //  var context = await _browser.NewContextAsync();
-        _page = _browser.Pages[0];
-        Notifier.Display("browser started");
+                Server = $"{pr[0]}:{pr[1]}",
+                Username = pr[2],
+                Password = pr[3]
+            }
+        });
+        p = await context.NewPageAsync();
+        // _page2 = await _browser2.NewPageAsync();
+        Notifier.Display("context started");
+        return p;
     }
     
-    
-    
-    public async Task Dispose()
+    protected async Task<bool> Exist( string selector, int timeout = 5000)
     {
-        if (_browser == null) return;
-        await _browser.DisposeAsync();
-        _playwright.Dispose();
+        try
+        {
+            await p.Locator(selector).WaitForAsync(new LocatorWaitForOptions { Timeout = timeout, State = WaitForSelectorState.Attached });
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
+
+    protected async Task Fill( string selector, string value, int timeout = 500)
+    {
+        try
+        {
+            await p.Locator(selector).FillAsync(value, new LocatorFillOptions { Timeout = timeout });
+        }
+        catch (Exception)
+        {
+            throw new KnownException($"Failed to find {selector}");
+        }
+    }
+
+    protected async Task Click(string selector, int timeout = 5000, bool suppressException = false)
+    {
+        try
+        {
+            await p.Locator(selector).ClickAsync(new LocatorClickOptions { Timeout = timeout });
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            if (!suppressException)
+                throw new KnownException($"Failed to find {selector}");
+        }
+    }
+
 }

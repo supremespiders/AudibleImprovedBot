@@ -7,10 +7,10 @@ namespace AudibleImprovedBot
 {
     public partial class Form1 : Form
     {
-        private readonly AudibleService _audibleService = new();
         private readonly string _path = Application.StartupPath;
         private Dictionary<string, string> _config;
         private const string SimpleDateFormat = "dd/MM/yyyy HH:mm:ss";
+        private Scraper _scraper = new();
 
         public Form1()
         {
@@ -22,7 +22,7 @@ namespace AudibleImprovedBot
             SaveConfig();
             try
             {
-                await _audibleService.Work();
+                await _scraper.MainWork();
             }
             catch (Exception exception)
             {
@@ -33,7 +33,7 @@ namespace AudibleImprovedBot
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveConfig();
-            await _audibleService.Dispose();
+            await _scraper.Dispose();
         }
 
         void InitControls(Control parent)

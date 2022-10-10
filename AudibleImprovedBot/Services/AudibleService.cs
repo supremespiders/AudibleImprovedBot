@@ -1,51 +1,49 @@
-﻿using airbnb.comLister.Services;
+﻿using airbnb.comLister.Models;
+using airbnb.comLister.Services;
+using AudibleImprovedBot.Models;
 using Microsoft.Playwright;
+using Newtonsoft.Json.Linq;
 
 namespace AudibleImprovedBot.Services;
 
 public class AudibleService :BrowserBase
 {
-    
-    public async Task StartSpecial()
+    private Input _input;
+    private IBrowser _browser;
+
+    public AudibleService(Input input, IBrowser browser)
     {
-        Notifier.Display("Starting browser");
-        _playwright = await Playwright.CreateAsync();
-        var b = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions()
-        {
-            Headless = false,
-            Proxy = new Proxy()
-            {
-                Server = "194.163.175.24:808",
-                Username = "user",
-                Password = "puser"
-            }
-        });
-        _browser = await b.NewContextAsync(new BrowserNewContextOptions()
-        {
-            Proxy = new Proxy()
-            {
-                Server = "194.163.175.24:808",
-                Username = "user",
-                Password = "puser"
-            }
-        });
-        // _browser2 = await b.NewContextAsync(new BrowserNewContextOptions()
-        // {
-        //     Proxy = new Proxy()
-        //     {
-        //         Server = "194.163.175.24:808",
-        //         Username = "user",
-        //         Bypass = "puser"
-        //     }
-        // });
-        _page = await _browser.NewPageAsync();
-        // _page2 = await _browser2.NewPageAsync();
-        Notifier.Display("browser started");
+        _input = input;
+        _browser = browser;
     }
+    private async Task VerifyIp()
+    {
+        await p.GotoAsync("https://api.ipify.org?format=json");
+        var json = await p.TextContentAsync("//body");
+        var ip = (string)JObject.Parse(json).SelectToken("ip");
+        var proxyIp = _input.Proxy.Split(":")[0];
+        if (proxyIp != ip) throw new KnownException($"the ip we found is not the one of proxy");
+    }
+
+    private async Task LoginToAmazon()
+    {
+        await p.GotoAsync(_input.Link);
+        await Click("//*[@id='truste-consent-button']", 3000, true);
+        await Click("//a[@id='att_lightbox_close']",3000, true);
+        await Task.Delay(10000);
+        await Click("//a[text()='Sign In']");
+         await Fill("//input[@id='ap_email']",_input.MailAccountAudible,5000);
+        await Fill("//input[@id='ap_password']",_input.AudiblePassword);
+        await Click("//input[@id='signInSubmit']");
+        if (!await Exist("//a[contains(@href,'/signout')]")) throw new KnownException("Not logged in");
+    }
+    
     public async Task Work()
     {
-        await StartSpecial();
-        await _page.GotoAsync("https://api.ipify.org?format=json");
-      //  await _page2.GotoAsync("https://api.ipify.org?format=json");
+        await StartContext(_browser, _input.Proxy);
+      //  await VerifyIp();
+        await LoginToAmazon();
+
+        //  await _page2.GotoAsync("https://api.ipify.org?format=json");
     }
 }
