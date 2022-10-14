@@ -1,5 +1,8 @@
+using System.Diagnostics;
 using System.Globalization;
 using System.Net;
+using airbnb.comLister.Models;
+using AudibleImprovedBot.Models;
 using AudibleImprovedBot.Services;
 using Newtonsoft.Json;
 
@@ -20,13 +23,29 @@ namespace AudibleImprovedBot
         private async void startButton_Click(object sender, EventArgs e)
         {
             SaveConfig();
+            var c = new Config()
+            {
+                InputFile = inputI.Text,
+                DoRunAt = runAtI.Checked,
+                RunAt = dateTimeI.Value,
+                Stars = starsCountI.SelectedIndex,
+                TwoCaptchaKey = twoCaptchaKeyI.Text,
+                DoLimitRedeem = isRedeemLimitedI.Checked,
+                LimitRedeem = (int)redeemNumberI.Value,
+            };
             try
             {
-                await _scraper.MainWork();
+                await _scraper.MainWork(c);
             }
-            catch (Exception exception)
+            catch (KnownException ex)
             {
-                MessageBox.Show(exception.ToString());
+                ErrorLog(ex.Message);
+                Display(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                ErrorLog(ex.ToString());
+                Display(ex.Message);
             }
         }
 
@@ -185,7 +204,7 @@ namespace AudibleImprovedBot
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+             MessageBox.Show(ex.ToString());
             }
         }
 
@@ -220,20 +239,6 @@ namespace AudibleImprovedBot
             }
 
             displayT.Text = s;
-            NormalLog(s);
-        }
-
-        private delegate void DispD(string s);
-
-        public void Disp(string s)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new DispD(Disp), s);
-                return;
-            }
-
-            displayT.Text = s;
         }
 
         static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
@@ -255,8 +260,25 @@ namespace AudibleImprovedBot
             Directory.CreateDirectory($"{_path}/Screenshots");
             inputI.Text = _path;
             delayI.SelectedIndex = 0;
-            CheckForIllegalCrossThreadCalls = false;
+            Notifier.OnDisplay += OnDisplay;
+            Notifier.OnLog += OnLog;
+            Notifier.OnError += OnError;
             LoadConfig();
+        }
+        
+        private void OnError(object sender, string e)
+        {
+            ErrorLog(e);
+        }
+
+        private void OnLog(object sender, string e)
+        {
+            NormalLog(e);
+        }
+
+        private void OnDisplay(object sender, string e)
+        {
+            Display(e);
         }
 
         private void selectButton_Click(object sender, EventArgs e)

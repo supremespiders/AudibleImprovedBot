@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace airbnb.comLister.Services
+﻿namespace AudibleImprovedBot.Services
 {
     public class Notifier
     {
@@ -10,10 +8,10 @@ namespace airbnb.comLister.Services
         public static EventHandler<(int x, int total)> OnProgress { get; set; }
 
 
-        public static void Display(string s)
+        public static void Display(string s,bool log=true)
         {
             OnDisplay?.Invoke(null, s);
-            if (!s.Contains(" / "))
+            if (!s.Contains(" / ") && log)
                 OnLog?.Invoke(null, s);
         }
 

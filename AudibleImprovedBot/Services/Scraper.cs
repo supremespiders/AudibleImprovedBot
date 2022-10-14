@@ -1,5 +1,4 @@
 ﻿using airbnb.comLister.Models;
-using airbnb.comLister.Services;
 using AudibleImprovedBot.Models;
 using ExcelHelperExe;
 using Microsoft.Playwright;
@@ -18,6 +17,7 @@ public class Scraper
     protected IPlaywright _playwright;
     protected List<IPage> _pages;
     protected IBrowser _browser;
+    private readonly string _path = Application.StartupPath;
     async Task WaitForScheduledDate()
     {
         if (_shouldRunAt)
@@ -35,6 +35,7 @@ public class Scraper
     public async Task StartBrowser()
     {
         if (_playwright != null) return;
+        Notifier.Display($"Stating browser");
         _playwright = await Playwright.CreateAsync();
         _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions()
         {
@@ -48,19 +49,31 @@ public class Scraper
         });
     }
     
+    public async Task Attach()
+    {
+        _playwright = await Playwright.CreateAsync();
+        _browser = await _playwright.Chromium.ConnectOverCDPAsync("http://localhost:9222", new BrowserTypeConnectOverCDPOptions(){Timeout = 3000});
+        Notifier.Display("Attached");
+    }
+    
     public async Task Dispose()
     {
         if (_playwright == null) return;
         // foreach (var p in _pages)
-        //     await p.Context.DisposeAsync();        
-        _playwright.Dispose();
+        //     await p.Context.DisposeAsync();  
+        //_playwright.Dispose();
     }
     
-    public async Task MainWork()
+    public async Task MainWork(Config config)
     {
+        Notifier.Log("Started working");
+        CaptchaService.TwoCaptchaKey = config.TwoCaptchaKey;
         await StartBrowser();
+       //await Attach();
         var inputs = "input.xlsx".ReadFromExcel<Input>();
-        _audibleServices.Add(new AudibleService(inputs[0],_browser));
+         //_audibleServices.Add(new AudibleService(inputs[0],_browser,config));
+          // _audibleServices.Add(new AudibleService(inputs[1],_browser,config));
+         _audibleServices.Add(new AudibleService(inputs[0],_browser,config));
         //_audibleServices.Add(new AudibleService(inputs[1],_browser));
         var t = new List<Task>();
         foreach (var audibleService in _audibleServices)
@@ -69,6 +82,8 @@ public class Scraper
         }
 
         await Task.WhenAll(t);
+        Notifier.Log("completed");
+        await inputs.SaveToExcel("input.xlsx");
         return;
         await WaitForScheduledDate();
 

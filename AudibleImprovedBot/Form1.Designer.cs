@@ -44,30 +44,35 @@
             this.isRedeemLimitedI = new System.Windows.Forms.CheckBox();
             this.redeemNumberI = new System.Windows.Forms.NumericUpDown();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.delayI = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.delayBetweenFilesI = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.loopFilesI = new System.Windows.Forms.CheckBox();
-            this.starsCountI = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.SkipTheFailedI = new System.Windows.Forms.CheckBox();
             this.LoopI = new System.Windows.Forms.CheckBox();
+            this.SkipTheFailedI = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.starsCountI = new System.Windows.Forms.ComboBox();
+            this.loopFilesI = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.delayBetweenFilesI = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.delayI = new System.Windows.Forms.ComboBox();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.redeemNumberI)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delayBetweenFilesI)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // logT
             // 
             this.logT.BackColor = System.Drawing.SystemColors.Control;
+            this.logT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.logT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logT.Location = new System.Drawing.Point(0, 0);
+            this.logT.Location = new System.Drawing.Point(20, 20);
+            this.logT.Margin = new System.Windows.Forms.Padding(6);
             this.logT.Name = "logT";
-            this.logT.Size = new System.Drawing.Size(1694, 966);
+            this.logT.ReadOnly = true;
+            this.logT.Size = new System.Drawing.Size(1674, 405);
             this.logT.TabIndex = 1;
             this.logT.Text = "";
             // 
@@ -241,6 +246,96 @@
             this.panel2.Size = new System.Drawing.Size(1694, 485);
             this.panel2.TabIndex = 3;
             // 
+            // LoopI
+            // 
+            this.LoopI.AutoSize = true;
+            this.LoopI.Location = new System.Drawing.Point(773, 364);
+            this.LoopI.Name = "LoopI";
+            this.LoopI.Size = new System.Drawing.Size(305, 29);
+            this.LoopI.TabIndex = 21;
+            this.LoopI.Text = "Loop between entries of same file";
+            this.LoopI.UseVisualStyleBackColor = true;
+            // 
+            // SkipTheFailedI
+            // 
+            this.SkipTheFailedI.AutoSize = true;
+            this.SkipTheFailedI.Location = new System.Drawing.Point(456, 364);
+            this.SkipTheFailedI.Name = "SkipTheFailedI";
+            this.SkipTheFailedI.Size = new System.Drawing.Size(177, 29);
+            this.SkipTheFailedI.TabIndex = 20;
+            this.SkipTheFailedI.Text = "Skip failed entries";
+            this.SkipTheFailedI.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(31, 368);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(61, 25);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Stars#";
+            // 
+            // starsCountI
+            // 
+            this.starsCountI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.starsCountI.FormattingEnabled = true;
+            this.starsCountI.Items.AddRange(new object[] {
+            "Random 4-5",
+            "5"});
+            this.starsCountI.Location = new System.Drawing.Point(117, 365);
+            this.starsCountI.Name = "starsCountI";
+            this.starsCountI.Size = new System.Drawing.Size(244, 33);
+            this.starsCountI.TabIndex = 18;
+            // 
+            // loopFilesI
+            // 
+            this.loopFilesI.AutoSize = true;
+            this.loopFilesI.Location = new System.Drawing.Point(773, 305);
+            this.loopFilesI.Name = "loopFilesI";
+            this.loopFilesI.Size = new System.Drawing.Size(187, 29);
+            this.loopFilesI.TabIndex = 17;
+            this.loopFilesI.Text = "Loop between files";
+            this.loopFilesI.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(554, 309);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(168, 25);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Hours between files";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(307, 239);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(221, 25);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Promotion Codes next run";
+            // 
+            // delayBetweenFilesI
+            // 
+            this.delayBetweenFilesI.Location = new System.Drawing.Point(456, 307);
+            this.delayBetweenFilesI.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.delayBetweenFilesI.Name = "delayBetweenFilesI";
+            this.delayBetweenFilesI.Size = new System.Drawing.Size(92, 31);
+            this.delayBetweenFilesI.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(31, 306);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 25);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Delay";
+            // 
             // delayI
             // 
             this.delayI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -258,104 +353,24 @@
             this.delayI.Size = new System.Drawing.Size(244, 33);
             this.delayI.TabIndex = 12;
             // 
-            // label3
+            // panel4
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 306);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 25);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Delay";
-            // 
-            // delayBetweenFilesI
-            // 
-            this.delayBetweenFilesI.Location = new System.Drawing.Point(456, 307);
-            this.delayBetweenFilesI.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.delayBetweenFilesI.Name = "delayBetweenFilesI";
-            this.delayBetweenFilesI.Size = new System.Drawing.Size(92, 31);
-            this.delayBetweenFilesI.TabIndex = 14;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(307, 239);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(221, 25);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Promotion Codes next run";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(554, 309);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(168, 25);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Hours between files";
-            // 
-            // loopFilesI
-            // 
-            this.loopFilesI.AutoSize = true;
-            this.loopFilesI.Location = new System.Drawing.Point(773, 305);
-            this.loopFilesI.Name = "loopFilesI";
-            this.loopFilesI.Size = new System.Drawing.Size(187, 29);
-            this.loopFilesI.TabIndex = 17;
-            this.loopFilesI.Text = "Loop between files";
-            this.loopFilesI.UseVisualStyleBackColor = true;
-            // 
-            // starsCountI
-            // 
-            this.starsCountI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.starsCountI.FormattingEnabled = true;
-            this.starsCountI.Items.AddRange(new object[] {
-            "Random 4-5",
-            "5"});
-            this.starsCountI.Location = new System.Drawing.Point(117, 365);
-            this.starsCountI.Name = "starsCountI";
-            this.starsCountI.Size = new System.Drawing.Size(244, 33);
-            this.starsCountI.TabIndex = 18;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(31, 368);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 25);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Stars#";
-            // 
-            // SkipTheFailedI
-            // 
-            this.SkipTheFailedI.AutoSize = true;
-            this.SkipTheFailedI.Location = new System.Drawing.Point(456, 364);
-            this.SkipTheFailedI.Name = "SkipTheFailedI";
-            this.SkipTheFailedI.Size = new System.Drawing.Size(177, 29);
-            this.SkipTheFailedI.TabIndex = 20;
-            this.SkipTheFailedI.Text = "Skip failed entries";
-            this.SkipTheFailedI.UseVisualStyleBackColor = true;
-            // 
-            // LoopI
-            // 
-            this.LoopI.AutoSize = true;
-            this.LoopI.Location = new System.Drawing.Point(773, 364);
-            this.LoopI.Name = "LoopI";
-            this.LoopI.Size = new System.Drawing.Size(305, 29);
-            this.LoopI.TabIndex = 21;
-            this.LoopI.Text = "Loop between entries of same file";
-            this.LoopI.UseVisualStyleBackColor = true;
+            this.panel4.Controls.Add(this.logT);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(0, 485);
+            this.panel4.Name = "panel4";
+            this.panel4.Padding = new System.Windows.Forms.Padding(20, 20, 0, 0);
+            this.panel4.Size = new System.Drawing.Size(1694, 425);
+            this.panel4.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1694, 966);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.logT);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -367,6 +382,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delayBetweenFilesI)).EndInit();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -398,5 +414,6 @@
         private CheckBox SkipTheFailedI;
         private Label label6;
         private ComboBox starsCountI;
+        private Panel panel4;
     }
 }

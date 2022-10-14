@@ -15,6 +15,7 @@ public class Input
     public string TitleReview { get; set; }
     public string TextReview { get; set; }
     public string Title { get; set; }
+    public string Asin { get; set; }
     public string Result { get; set; }
     public string Message { get; set; }
 }
