@@ -40,13 +40,9 @@ public class AudibleService : BrowserBase
         // await Task.Delay(10000);
         await Click("//a[text()='Sign In']");
         await SolveImageCaptchaIfNeeded();
-        // await p.Context.StorageStateAsync(new()
-        // {
-        //     Path = "state.json"
-        // });
-        await Fill("//input[@id='ap_email']", _input.MailAccountAudible, 3000);
+        await Fill("//input[@id='ap_email']", _input.MailAccountAudible, 5000);
         await Fill("//input[@id='ap_password']", _input.AudiblePassword);
-        await Click("//input[@id='signInSubmit']");
+        await Click("//input[@id='signInSubmit']",15000);
         if (await Exist("(//*[@id='auth-error-message-box'])[1]"))
         {
             var text = await Text("(//*[@id='auth-error-message-box'])[1]//div[@class='a-alert-content']");
@@ -66,6 +62,13 @@ public class AudibleService : BrowserBase
         var solution = await CaptchaService.SolveCaptcha(src, $"{_path}/{_input.PromoCode}");
         await Fill("//input[@id='captchacharacters']", solution);
         await Click("//button[@type='submit']");
+        if (await Exist("//input[@id='ap_email']",20000))
+        {
+            await p.Context.StorageStateAsync(new()
+            {
+                Path = "state.json"
+            });
+        }
     }
 
     private async Task SolveCaptchaIfNeeded()
@@ -124,9 +127,9 @@ public class AudibleService : BrowserBase
         Notifier.Log($"{_input.MailAccountAudible} Start redeeming");
         await Fill("//input[@id='redeem-text-box']", _input.PromoCode);
         await Click("//*[@id='redeem-button']");
-        await ForAnyCondition(10000, "//div[@data-asin]", "//*[@id='error-text']");
-        if (await Exist("//div[@data-asin]", 500)) return await p.Locator("//div[@data-asin]").GetAttributeAsync("data-asin");
-        if (!await Exist("//*[@id='error-text']", 500)) throw new KnownException($"{_input.MailAccountAudible} something went wrong with redeeming");
+        //await ForAnyCondition(10000, "//div[@data-asin]", "//*[@id='error-text']");
+        if (await Exist("//div[@data-asin]", 10000)) return await p.Locator("//div[@data-asin]").GetAttributeAsync("data-asin");
+        if (!await Exist("//*[@id='error-text']", 2000,true)) throw new KnownException($"{_input.MailAccountAudible} something went wrong with redeeming");
         var redeemMessage = (await p.Locator("#error-text").TextContentAsync())?.Replace("\r", "").Replace("\n", "").Trim();
         if (redeemMessage == null) throw new KnownException($"{_input.MailAccountAudible} something went wrong with redeeming");
         if (redeemMessage.Contains("This promotional code has already been claimed")) throw new KnownException($"Already redeemed and the Asin is not provided on input file");
@@ -199,7 +202,7 @@ public class AudibleService : BrowserBase
             tries++;
             if (tries == 20) throw new KnownException($"tried 20 times to rate {_input.Asin} but failed");
             await Click(starS);
-            if (await Exist("//h3[text()='Review not available for this title']", 1000)) 
+            if (await Exist("//h3[text()='Review not available for this title']", 1000,true)) 
                 throw new KnownException($"This book need listening first");
             await Task.Delay(3000);
         } while (true);
@@ -260,7 +263,7 @@ public class AudibleService : BrowserBase
         if (!await Exist(reviewLinkS)) throw new KnownException($"{_input.MailAccountAudible} Review link not present , probably we need to listen to audio first!");
         var reviewLink = await p.Locator(reviewLinkS).GetAttributeAsync("href");
         if (string.IsNullOrEmpty(reviewLink)) throw new KnownException($"{_input.MailAccountAudible} Review link not present , probably we need to listen to audio first!");
-        await p.GotoAsync("https://www.audible.com" + reviewLink);
+        await p.GotoAsync("https://www.audible.com" + reviewLink,new PageGotoOptions());
         var r1 = GetRate();
         var r2 = GetRate();
         await Click($"(//div[@class='bc-rating-stars '])[2]//span[@data-index='{r1}']");
@@ -320,6 +323,7 @@ public class AudibleService : BrowserBase
                 FullPage = true
             });
             var html = await p.ContentAsync();
+            await p.WaitForLoadStateAsync();
             await File.WriteAllTextAsync($"{_path}/screenshots/{_input.PromoCode}-error.html", html);
         }
         catch (Exception e)

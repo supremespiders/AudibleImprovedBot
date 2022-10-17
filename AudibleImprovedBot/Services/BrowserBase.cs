@@ -25,6 +25,7 @@ public class BrowserBase
             StorageStatePath = "state.json"
         });
         p = await context.NewPageAsync();
+        p.SetDefaultNavigationTimeout(60000);
         // _page2 = await _browser2.NewPageAsync();
     }
 
@@ -37,11 +38,11 @@ public class BrowserBase
             p = context.Pages.First();
     }
 
-    protected async Task<bool> Exist( string selector, int timeout = 5000)
+    protected async Task<bool> Exist( string selector, int timeout = 5000,bool visible=false)
     {
         try
         {
-            await p.Locator(selector).WaitForAsync(new LocatorWaitForOptions { Timeout = timeout, State = WaitForSelectorState.Attached });
+            await p.Locator(selector).WaitForAsync(new LocatorWaitForOptions { Timeout = timeout, State =visible ? WaitForSelectorState.Visible: WaitForSelectorState.Attached });
             return true;
         }
         catch (Exception e)
