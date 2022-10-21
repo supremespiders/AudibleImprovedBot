@@ -25,13 +25,18 @@ namespace AudibleImprovedBot
             SaveConfig();
             var c = new Config()
             {
-                InputFile = inputI.Text,
+                InputFolder = inputI.Text,
                 DoRunAt = runAtI.Checked,
                 RunAt = dateTimeI.Value,
                 Stars = starsCountI.SelectedIndex,
                 TwoCaptchaKey = twoCaptchaKeyI.Text,
                 DoLimitRedeem = isRedeemLimitedI.Checked,
-                LimitRedeem = (int)redeemNumberI.Value,
+                TargetSuccessPerFile = (int)redeemNumberI.Value,
+                DoLoop = LoopI.Checked,
+                DoLoopFiles = loopFilesI.Checked,
+                HoursBetweenFiles = (int)delayBetweenFilesI.Value,
+                SkipFailedEntries = SkipTheFailedI.Checked,
+                MaxThreads = (int)threadsI.Value
             };
             try
             {
@@ -283,12 +288,29 @@ namespace AudibleImprovedBot
 
         private void selectButton_Click(object sender, EventArgs e)
         {
-
+            using var fbd = new FolderBrowserDialog();
+            var result = fbd.ShowDialog();
+            if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+            {
+                inputI.Text = fbd.SelectedPath;
+            }
         }
 
         private void openFileButton_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                var psi = new ProcessStartInfo
+                {
+                    FileName = inputI.Text,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception exception)
+            {
+               ErrorLog(exception.ToString());
+            }
         }
     }
 }

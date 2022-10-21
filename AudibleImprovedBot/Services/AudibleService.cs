@@ -33,25 +33,26 @@ public class AudibleService : BrowserBase
     private async Task LoginToAmazon()
     {
         Notifier.Log($"{_input.MailAccountAudible} Opening amazon page");
-        await p.GotoAsync(_input.Link,new PageGotoOptions(){Timeout = 60000});
-        Notifier.Log("Start login");
+        await p.GotoAsync(_input.Link, new PageGotoOptions() { Timeout = 60000 });
+        Notifier.Log($"{_input.MailAccountAudible} Start login");
         await Click("//*[@id='truste-consent-button']", 3000, true);
         await Click("//a[@id='att_lightbox_close']", 1000, true);
         // await Task.Delay(10000);
-        await Click("//a[text()='Sign In']");
+        await Click("//a[text()='Sign In']", 30000);
         await SolveImageCaptchaIfNeeded();
-        await Fill("//input[@id='ap_email']", _input.MailAccountAudible, 5000);
+        await Fill("//input[@id='ap_email']", _input.MailAccountAudible, 30000);
         await Fill("//input[@id='ap_password']", _input.AudiblePassword);
-        await Click("//input[@id='signInSubmit']",15000);
+        await Click("//input[@id='signInSubmit']", 60000);
         if (await Exist("(//*[@id='auth-error-message-box'])[1]"))
         {
             var text = await Text("(//*[@id='auth-error-message-box'])[1]//div[@class='a-alert-content']");
-            throw new KnownException(text);
+            throw new KnownException($"{_input.MailAccountAudible} {text}");
         }
 
         await SolveCaptchaIfNeeded();
         await VerifyByEmailIfNeeded();
-        if (!await Exist("//a[contains(@href,'/signout')]")) throw new KnownException("Not logged in");
+        if (!await Exist("//a[contains(@href,'/signout')]")) throw new KnownException($"{_input.MailAccountAudible} Not logged in");
+        Notifier.Display($"{_input.MailAccountAudible} logged in");
     }
 
     private async Task SolveImageCaptchaIfNeeded()
@@ -61,8 +62,8 @@ public class AudibleService : BrowserBase
         var src = await p.Locator("//img[contains(@src,'captcha')]").GetAttributeAsync("src");
         var solution = await CaptchaService.SolveCaptcha(src, $"{_path}/{_input.PromoCode}");
         await Fill("//input[@id='captchacharacters']", solution);
-        await Click("//button[@type='submit']");
-        if (await Exist("//input[@id='ap_email']",20000))
+        await Click("//button[@type='submit']", 30000);
+        if (await Exist("//input[@id='ap_email']", 2000))
         {
             await p.Context.StorageStateAsync(new()
             {
@@ -129,7 +130,7 @@ public class AudibleService : BrowserBase
         await Click("//*[@id='redeem-button']");
         //await ForAnyCondition(10000, "//div[@data-asin]", "//*[@id='error-text']");
         if (await Exist("//div[@data-asin]", 10000)) return await p.Locator("//div[@data-asin]").GetAttributeAsync("data-asin");
-        if (!await Exist("//*[@id='error-text']", 2000,true)) throw new KnownException($"{_input.MailAccountAudible} something went wrong with redeeming");
+        if (!await Exist("//*[@id='error-text']", 2000, true)) throw new KnownException($"{_input.MailAccountAudible} something went wrong with redeeming");
         var redeemMessage = (await p.Locator("#error-text").TextContentAsync())?.Replace("\r", "").Replace("\n", "").Trim();
         if (redeemMessage == null) throw new KnownException($"{_input.MailAccountAudible} something went wrong with redeeming");
         if (redeemMessage.Contains("This promotional code has already been claimed")) throw new KnownException($"Already redeemed and the Asin is not provided on input file");
@@ -157,7 +158,7 @@ public class AudibleService : BrowserBase
             if (buttonClass == null) throw new KnownException($"{_input.MailAccountAudible} Null class for mark as finished");
             if (buttonClass.Contains("bc-pub-hidden"))
             {
-                Notifier.Log(tries == 0 ? $"{_input.Asin} already Marked as finished" : $"{_input.Asin} Marked as finished");
+                Notifier.Log(tries == 0 ? $"{_input.MailAccountAudible} {_input.Asin} already Marked as finished" : $"{_input.MailAccountAudible} {_input.Asin} Marked as finished");
                 break;
             }
 
@@ -195,15 +196,15 @@ public class AudibleService : BrowserBase
             var isChecked = (await p.Locator(starS).GetAttributeAsync("aria-checked")) != "false";
             if (isChecked)
             {
-                Notifier.Log(tries == 0 ? $"{_input.Asin} already rated" : $"{_input.Asin} Rated");
+                Notifier.Log(tries == 0 ? $"{_input.MailAccountAudible} {_input.Asin} already rated" : $"{_input.Asin} Rated");
                 break;
             }
 
             tries++;
-            if (tries == 20) throw new KnownException($"tried 20 times to rate {_input.Asin} but failed");
+            if (tries == 20) throw new KnownException($"{_input.MailAccountAudible} tried 20 times to rate {_input.Asin} but failed");
             await Click(starS);
-            if (await Exist("//h3[text()='Review not available for this title']", 1000,true)) 
-                throw new KnownException($"This book need listening first");
+            if (await Exist("//h3[text()='Review not available for this title']", 1000, true))
+                throw new KnownException($"{_input.MailAccountAudible} This book need listening first");
             await Task.Delay(3000);
         } while (true);
     }
@@ -217,17 +218,16 @@ public class AudibleService : BrowserBase
             var link = await p.Locator(reviewLinkS).GetAttributeAsync("href");
             if (!string.IsNullOrEmpty(link))
             {
-                Notifier.Log($"{_input.Asin} we listened to this book already");
+                Notifier.Log($"{_input.MailAccountAudible} {_input.Asin} no need to listened to this book");
                 return;
             }
-         
         }
 
-        Notifier.Log($"{_input.Asin} started listening to the book");
+        Notifier.Log($"{_input.MailAccountAudible}  {_input.Asin} started listening to the book");
         await Click($"//div[@id='adbl-library-content-row-{_input.Asin}']//span[contains(@class,'adbl-library-listen-now-button')]");
         var p2 = p;
         await Task.Delay(5000);
-        p = p.Context.Pages.First(x => x.Url.StartsWith("https://www.audible.com/webplaye"));
+        p = p.Context.Pages.First(x => x.Url.Contains("/webplaye"));
         //p = p.Context.Pages.Last();
         await Click("//div[contains(@class,'adblCloudPlayerSpeedNarration')]", 10000);
         await Click("(//div[@class='bc-radio'])[last()]");
@@ -259,11 +259,18 @@ public class AudibleService : BrowserBase
     private async Task WriteReview()
     {
         if (!await Exist($"//div[@id='adbl-library-content-row-{_input.Asin}']")) throw new KnownException($"{_input.MailAccountAudible} Failed to lookup the book");
+        if (await Exist($"//div[@id='adbl-library-content-row-{_input.Asin}']//a[text()='Edit review']", 500, true))
+        {
+            Notifier.Display($"{_input.MailAccountAudible} already reviewed");
+            return;
+        }
+
         var reviewLinkS = $"//div[@id='adbl-library-content-row-{_input.Asin}']//a[contains(@href,'/write-review?')]";
         if (!await Exist(reviewLinkS)) throw new KnownException($"{_input.MailAccountAudible} Review link not present , probably we need to listen to audio first!");
         var reviewLink = await p.Locator(reviewLinkS).GetAttributeAsync("href");
         if (string.IsNullOrEmpty(reviewLink)) throw new KnownException($"{_input.MailAccountAudible} Review link not present , probably we need to listen to audio first!");
-        await p.GotoAsync("https://www.audible.com" + reviewLink,new PageGotoOptions());
+        Notifier.Display($"{_input.MailAccountAudible} start review the book");
+        await p.GotoAsync(BaseUrl() + reviewLink, new PageGotoOptions());
         var r1 = GetRate();
         var r2 = GetRate();
         await Click($"(//div[@class='bc-rating-stars '])[2]//span[@data-index='{r1}']");
@@ -273,9 +280,31 @@ public class AudibleService : BrowserBase
         await Click("#preview-button");
         await Click("//span[@id='submit-review-button']");
         await Click("//span[@id='confirmReviewSuccess']");
+        Notifier.Display($"{_input.MailAccountAudible} review succeed");
     }
 
-    public async Task Work()
+    public async Task<bool> TestWork()
+    {
+        var t = _random.Next(0, 2);
+        Notifier.Log($"{_input.MailAccountAudible} Start working");
+        await Task.Delay(3000);
+        if (t == 0)
+        {
+            _input.Result = "success";
+            Notifier.Log($"{_input.MailAccountAudible} success");
+            _input.Message = DateTime.Now.ToString("G");
+        }
+        else
+        {
+            Notifier.Error($"{_input.MailAccountAudible} failed");
+            _input.Result = "failed";
+            _input.Message = "test";
+        }
+
+        return t == 0;
+    }
+
+    public async Task<bool> Work()
     {
         try
         {
@@ -293,6 +322,7 @@ public class AudibleService : BrowserBase
             await WriteReview();
             _input.Result = "success";
             _input.Message = DateTime.Now.ToString("G");
+            return true;
         }
         catch (KnownException ex)
         {
@@ -304,9 +334,11 @@ public class AudibleService : BrowserBase
         }
         finally
         {
-            // if (p != null)
-            //     await p.Context.DisposeAsync();
+            if (p != null)
+                await p.Context.DisposeAsync();
         }
+
+        return false;
     }
 
     private async Task HandleError(string error)

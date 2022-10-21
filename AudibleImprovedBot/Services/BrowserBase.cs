@@ -14,16 +14,18 @@ public class BrowserBase
     {
         if (p != null) return;
         var pr = proxy.Split(":");
-        var context = await browser.NewContextAsync(new BrowserNewContextOptions()
+        var o = new BrowserNewContextOptions()
         {
             Proxy = new Proxy()
             {
                 Server = $"{pr[0]}:{pr[1]}",
                 Username = pr[2],
                 Password = pr[3]
-            },
-            StorageStatePath = "state.json"
-        });
+            }
+        };
+        if (File.Exists("state.json"))
+            o.StorageStatePath = "state.json";
+        var context = await browser.NewContextAsync(o);
         p = await context.NewPageAsync();
         p.SetDefaultNavigationTimeout(60000);
         // _page2 = await _browser2.NewPageAsync();
@@ -81,7 +83,7 @@ public class BrowserBase
     {
         try
         {
-            await p.Locator(selector).ClickAsync(new LocatorClickOptions { Timeout = timeout });
+            await p.Locator(selector).ClickAsync(new LocatorClickOptions { Timeout = timeout});
         }
         catch (Exception ex)
         {

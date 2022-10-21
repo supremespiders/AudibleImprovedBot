@@ -55,12 +55,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.delayI = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.threadsI = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.redeemNumberI)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delayBetweenFilesI)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.threadsI)).BeginInit();
             this.SuspendLayout();
             // 
             // logT
@@ -219,6 +222,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.threadsI);
             this.panel2.Controls.Add(this.LoopI);
             this.panel2.Controls.Add(this.SkipTheFailedI);
             this.panel2.Controls.Add(this.label6);
@@ -363,6 +368,37 @@
             this.panel4.Size = new System.Drawing.Size(1694, 425);
             this.panel4.TabIndex = 4;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(675, 180);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(74, 25);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Threads";
+            // 
+            // threadsI
+            // 
+            this.threadsI.Location = new System.Drawing.Point(577, 178);
+            this.threadsI.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.threadsI.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.threadsI.Name = "threadsI";
+            this.threadsI.Size = new System.Drawing.Size(92, 31);
+            this.threadsI.TabIndex = 22;
+            this.threadsI.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -372,7 +408,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "AudibleImprovedBot 1.00";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
@@ -383,6 +419,7 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.delayBetweenFilesI)).EndInit();
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.threadsI)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -415,5 +452,7 @@
         private Label label6;
         private ComboBox starsCountI;
         private Panel panel4;
+        private Label label7;
+        private NumericUpDown threadsI;
     }
 }

@@ -2,13 +2,18 @@
 
 public class Config
 {
-    public string InputFile { get; set; }
+    public string InputFolder { get; set; }
     public string TwoCaptchaKey { get; set; }
     public bool DoRunAt { get; set; }
     public DateTime RunAt { get; set; }
     public bool DoLimitRedeem { get; set; }
-    public int LimitRedeem { get; set; }
+    public int TargetSuccessPerFile { get; set; }
     public int Delay { get; set; }
     public int Stars { get; set; }
     public int HoursBetweenFiles { get; set; }
+    public int MaxThreads { get; set; }
+
+    public bool DoLoop { get; set; }
+    public bool DoLoopFiles { get; set; }
+    public bool SkipFailedEntries { get; set; }
 }
