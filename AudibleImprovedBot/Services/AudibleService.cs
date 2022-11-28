@@ -96,7 +96,7 @@ public class AudibleService : BrowserBase
         await Fill("//input[@name='email']", _input.MailAccountAudible);
         await Fill("//fieldset[@data-rel='webmail']//input[@name='password']", _input.EmailPassword);
         await Click("//button[text()='Login']");
-        var firstEmailS = "(//div[@class='messageListPlace']//div[contains(@class,'subjectParent')])[1]";
+        var firstEmailS = "(//span[@class='subject'])[1]";
         if (!await Exist(firstEmailS))
         {
             if (!await Exist("//div[@data-sitekey]")) throw new KnownException($"Failed to login to email service and can't find captcha");
@@ -110,8 +110,11 @@ public class AudibleService : BrowserBase
         var message = await p.Locator(firstEmailS).TextContentAsync();
         if (message == null || !message.Contains("Sign-in")) throw new KnownException($"{_input.MailAccountAudible} Last message is not Amazon security alert: Sign-in attempt");
         await Click(firstEmailS);
-        if (!await Exist("//a[text()=' Approve or Deny.']")) throw new KnownException($"{_input.MailAccountAudible} Could not locate the approve link");
-        var link = await p.GetAttributeAsync("//a[text()=' Approve or Deny.']", "href");
+
+        // if (!await Exist("//a[text()=' Approve or Deny.']")) 
+        //     throw new KnownException($"{_input.MailAccountAudible} Could not locate the approve link");
+        var frame = p.FrameLocator("#messagecontframe");
+        var link = await frame.Locator("//a[text()=' Approve or Deny.']").GetAttributeAsync("href", new LocatorGetAttributeOptions() { Timeout = 15000 });
         if (link == null) throw new KnownException($"{_input.MailAccountAudible} Failed to retrieve link from approved link node");
         await p.GotoAsync(link);
         await Click("//input[@name='customerResponseApproveButton']");
@@ -271,12 +274,19 @@ public class AudibleService : BrowserBase
         if (string.IsNullOrEmpty(reviewLink)) throw new KnownException($"{_input.MailAccountAudible} Review link not present , probably we need to listen to audio first!");
         Notifier.Display($"{_input.MailAccountAudible} start review the book");
         await p.GotoAsync(BaseUrl() + reviewLink, new PageGotoOptions());
+        if (!await Exist("(//div[@class='bc-rating-stars '])[2]//span[@data-index='2' and @aria-checked='true']"))
+        {
+            Notifier.Display($"{_input.MailAccountAudible} already Rated (didn't check the review text)");
+            return;
+        }
         var r1 = GetRate();
         var r2 = GetRate();
         await Click($"(//div[@class='bc-rating-stars '])[2]//span[@data-index='{r1}']");
         await Click($"(//div[@class='bc-rating-stars '])[3]//span[@data-index='{r2}']");
-        await Fill("#review-title", _input.TitleReview);
-        await Fill("#review-body", _input.TextReview);
+        if (!string.IsNullOrEmpty(_input.TitleReview))
+            await Fill("#review-title", _input.TitleReview);
+        if (!string.IsNullOrEmpty(_input.TextReview))
+            await Fill("#review-body", _input.TextReview);
         await Click("#preview-button");
         await Click("//span[@id='submit-review-button']");
         await Click("//span[@id='confirmReviewSuccess']");
