@@ -156,6 +156,7 @@ public class Scraper
             }
 
             if (tasks.Count != threads && i < _inputs.Count) continue;
+            if (tasks.Count == 0) break;
             var t = await Task.WhenAny(tasks).ConfigureAwait(false);
             tasks.Remove(t);
             var b = await t;
