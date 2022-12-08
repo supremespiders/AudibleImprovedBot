@@ -274,19 +274,18 @@ public class AudibleService : BrowserBase
         if (string.IsNullOrEmpty(reviewLink)) throw new KnownException($"{_input.MailAccountAudible} Review link not present , probably we need to listen to audio first!");
         Notifier.Display($"{_input.MailAccountAudible} start review the book");
         await p.GotoAsync(BaseUrl() + reviewLink, new PageGotoOptions());
-        if (!await Exist("(//div[@class='bc-rating-stars '])[2]//span[@data-index='2' and @aria-checked='true']"))
+        if (await Exist("(//div[@class='bc-rating-stars '])[2]//span[@data-index='2' and @aria-checked='true']"))
         {
-            Notifier.Display($"{_input.MailAccountAudible} already Rated (didn't check the review text)");
+            Notifier.Display($"{_input.MailAccountAudible} already reviewed");
             return;
         }
+
         var r1 = GetRate();
         var r2 = GetRate();
         await Click($"(//div[@class='bc-rating-stars '])[2]//span[@data-index='{r1}']");
         await Click($"(//div[@class='bc-rating-stars '])[3]//span[@data-index='{r2}']");
-        if (!string.IsNullOrEmpty(_input.TitleReview))
-            await Fill("#review-title", _input.TitleReview);
-        if (!string.IsNullOrEmpty(_input.TextReview))
-            await Fill("#review-body", _input.TextReview);
+        await Fill("#review-title", _input.TitleReview);
+        await Fill("#review-body", _input.TextReview);
         await Click("#preview-button");
         await Click("//span[@id='submit-review-button']");
         await Click("//span[@id='confirmReviewSuccess']");
@@ -329,7 +328,8 @@ public class AudibleService : BrowserBase
             await MarkAsFinish();
             await ListenToBook();
             await Rate();
-            await WriteReview();
+            if (!string.IsNullOrEmpty(_input.TextReview))
+                await WriteReview();
             _input.Result = "success";
             _input.Message = DateTime.Now.ToString("G");
             return true;
