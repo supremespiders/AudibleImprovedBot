@@ -22,6 +22,7 @@ namespace AudibleImprovedBot
 
         private async void startButton_Click(object sender, EventArgs e)
         {
+            logT.Text = "";
             SaveConfig();
             var c = new Config()
             {
@@ -268,9 +269,21 @@ namespace AudibleImprovedBot
             Notifier.OnDisplay += OnDisplay;
             Notifier.OnLog += OnLog;
             Notifier.OnError += OnError;
+            _scraper.OnStaticChange += OnStaticChange;
             LoadConfig();
         }
-        
+
+        private void OnStaticChange(object sender, Static e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                totalEntriesL.Text = e.TotalEntries.ToString();
+                successL.Text = e.Success.ToString();
+                failedL.Text = e.Failed.ToString();
+                toProcessL.Text = e.ToProcess.ToString();
+            });
+        }
+
         private void OnError(object sender, string e)
         {
             ErrorLog(e);

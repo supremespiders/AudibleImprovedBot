@@ -14,6 +14,8 @@ public class Scraper
     private Config _config;
     private List<Input> _inputs;
     private string _currentFile;
+    private Static _static = new Static();
+    public EventHandler<Static> OnStaticChange;
 
     async Task WaitForScheduledDate()
     {
@@ -94,10 +96,33 @@ public class Scraper
         return false;
     }
 
+    void GetStatistic()
+    {
+        _static = new Static();
+        var files = Directory.GetFiles(_config.InputFolder).ToList();
+        foreach (var t in files)
+        {
+            var inputs= t.ReadFromExcel<Input>();
+            _static.TotalEntries += inputs.Count;
+            foreach (var input in inputs)
+            {
+                if (string.IsNullOrEmpty(input.Result))
+                    _static.ToProcess++;
+                else if (input.Result == "success")
+                    _static.Success++;
+                else
+                    _static.Failed++;
+            }
+        }
+
+        OnStaticChange?.Invoke(this, _static);
+    }
+    
     async Task ProcessFiles()
     {
         await WaitForScheduledDate();
         var files = Directory.GetFiles(_config.InputFolder).ToList();
+        GetStatistic();
         do
         {
             var completed = 0;
@@ -163,7 +188,7 @@ public class Scraper
             if (b) success++;
             else fails++;
             await _inputs.SaveToExcel(_currentFile);
-
+            GetStatistic();
             if (_config.DoLimitRedeem && targetSuccess == success) break;
             if (tasks.Count == 0 && i == _inputs.Count) break;
         } while (true);
@@ -176,7 +201,7 @@ public class Scraper
         Notifier.Display("Start working");
         _config = config;
         CaptchaService.TwoCaptchaKey = config.TwoCaptchaKey;
-        await StartBrowser();
+       // await StartBrowser();
         await ProcessFiles();
         Notifier.Display("Work completed");
         return;

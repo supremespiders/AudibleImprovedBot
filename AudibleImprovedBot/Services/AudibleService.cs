@@ -313,8 +313,14 @@ public class AudibleService : BrowserBase
         return t == 0;
     }
 
+    private Random _rnd = new Random();
     public async Task<bool> Work()
     {
+        Notifier.Log($"{_input.MailAccountAudible} start working");
+        await Task.Delay(1000);
+        var t = _rnd.Next(0, 2);
+        Notifier.Log($"{_input.MailAccountAudible} {(t == 0 ? "Success":"Failed")}");
+        return t == 0;
         try
         {
             await StartContext(_browser, _input.Proxy);
