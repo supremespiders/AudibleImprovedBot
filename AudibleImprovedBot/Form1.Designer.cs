@@ -44,6 +44,14 @@
             this.isRedeemLimitedI = new System.Windows.Forms.CheckBox();
             this.redeemNumberI = new System.Windows.Forms.NumericUpDown();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.toProcessL = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.failedL = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.successL = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.totalEntriesL = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.threadsI = new System.Windows.Forms.NumericUpDown();
             this.LoopI = new System.Windows.Forms.CheckBox();
@@ -57,14 +65,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.delayI = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.totalEntriesL = new System.Windows.Forms.Label();
-            this.successL = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.failedL = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.toProcessL = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.testI = new System.Windows.Forms.CheckBox();
+            this.clearAllButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.redeemNumberI)).BeginInit();
@@ -79,11 +81,11 @@
             this.logT.BackColor = System.Drawing.SystemColors.Control;
             this.logT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.logT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logT.Location = new System.Drawing.Point(16, 16);
-            this.logT.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.logT.Location = new System.Drawing.Point(20, 20);
+            this.logT.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.logT.Name = "logT";
             this.logT.ReadOnly = true;
-            this.logT.Size = new System.Drawing.Size(1339, 324);
+            this.logT.Size = new System.Drawing.Size(1674, 405);
             this.logT.TabIndex = 1;
             this.logT.Text = "";
             // 
@@ -91,38 +93,39 @@
             // 
             this.panel1.Controls.Add(this.displayT);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 728);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 910);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1355, 45);
+            this.panel1.Size = new System.Drawing.Size(1694, 56);
             this.panel1.TabIndex = 2;
             // 
             // displayT
             // 
             this.displayT.AutoSize = true;
-            this.displayT.Location = new System.Drawing.Point(25, 12);
+            this.displayT.Location = new System.Drawing.Point(31, 15);
             this.displayT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.displayT.Name = "displayT";
-            this.displayT.Size = new System.Drawing.Size(21, 20);
+            this.displayT.Size = new System.Drawing.Size(26, 25);
             this.displayT.TabIndex = 0;
             this.displayT.Text = "--";
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.clearAllButton);
             this.panel3.Controls.Add(this.startButton);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(1115, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Location = new System.Drawing.Point(1394, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(240, 388);
+            this.panel3.Size = new System.Drawing.Size(300, 485);
             this.panel3.TabIndex = 1;
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(23, 328);
-            this.startButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.startButton.Location = new System.Drawing.Point(29, 410);
+            this.startButton.Margin = new System.Windows.Forms.Padding(2);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(207, 38);
+            this.startButton.Size = new System.Drawing.Size(259, 48);
             this.startButton.TabIndex = 0;
             this.startButton.Text = "start";
             this.startButton.UseVisualStyleBackColor = true;
@@ -130,29 +133,29 @@
             // 
             // inputI
             // 
-            this.inputI.Location = new System.Drawing.Point(129, 45);
-            this.inputI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.inputI.Location = new System.Drawing.Point(161, 56);
+            this.inputI.Margin = new System.Windows.Forms.Padding(2);
             this.inputI.Name = "inputI";
             this.inputI.ReadOnly = true;
-            this.inputI.Size = new System.Drawing.Size(473, 27);
+            this.inputI.Size = new System.Drawing.Size(590, 31);
             this.inputI.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 45);
+            this.label1.Location = new System.Drawing.Point(31, 56);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 20);
+            this.label1.Size = new System.Drawing.Size(85, 25);
             this.label1.TabIndex = 3;
             this.label1.Text = "Input File";
             // 
             // selectButton
             // 
-            this.selectButton.Location = new System.Drawing.Point(618, 45);
-            this.selectButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.selectButton.Location = new System.Drawing.Point(772, 56);
+            this.selectButton.Margin = new System.Windows.Forms.Padding(2);
             this.selectButton.Name = "selectButton";
-            this.selectButton.Size = new System.Drawing.Size(110, 27);
+            this.selectButton.Size = new System.Drawing.Size(138, 34);
             this.selectButton.TabIndex = 4;
             this.selectButton.Text = "Select File";
             this.selectButton.UseVisualStyleBackColor = true;
@@ -160,10 +163,10 @@
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(733, 43);
-            this.openFileButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.openFileButton.Location = new System.Drawing.Point(916, 54);
+            this.openFileButton.Margin = new System.Windows.Forms.Padding(2);
             this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(110, 27);
+            this.openFileButton.Size = new System.Drawing.Size(138, 34);
             this.openFileButton.TabIndex = 5;
             this.openFileButton.Text = "Open File";
             this.openFileButton.UseVisualStyleBackColor = true;
@@ -171,19 +174,19 @@
             // 
             // twoCaptchaKeyI
             // 
-            this.twoCaptchaKeyI.Location = new System.Drawing.Point(129, 94);
-            this.twoCaptchaKeyI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.twoCaptchaKeyI.Location = new System.Drawing.Point(161, 118);
+            this.twoCaptchaKeyI.Margin = new System.Windows.Forms.Padding(2);
             this.twoCaptchaKeyI.Name = "twoCaptchaKeyI";
-            this.twoCaptchaKeyI.Size = new System.Drawing.Size(473, 27);
+            this.twoCaptchaKeyI.Size = new System.Drawing.Size(590, 31);
             this.twoCaptchaKeyI.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 97);
+            this.label2.Location = new System.Drawing.Point(31, 121);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 20);
+            this.label2.Size = new System.Drawing.Size(119, 25);
             this.label2.TabIndex = 7;
             this.label2.Text = "2Captcha Key";
             // 
@@ -191,19 +194,19 @@
             // 
             this.dateTimeI.CustomFormat = "MM/dd/yyyy HH:mm:ss";
             this.dateTimeI.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeI.Location = new System.Drawing.Point(129, 142);
-            this.dateTimeI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimeI.Location = new System.Drawing.Point(161, 178);
+            this.dateTimeI.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimeI.Name = "dateTimeI";
-            this.dateTimeI.Size = new System.Drawing.Size(198, 27);
+            this.dateTimeI.Size = new System.Drawing.Size(246, 31);
             this.dateTimeI.TabIndex = 8;
             // 
             // runAtI
             // 
             this.runAtI.AutoSize = true;
-            this.runAtI.Location = new System.Drawing.Point(25, 146);
-            this.runAtI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.runAtI.Location = new System.Drawing.Point(31, 182);
+            this.runAtI.Margin = new System.Windows.Forms.Padding(2);
             this.runAtI.Name = "runAtI";
-            this.runAtI.Size = new System.Drawing.Size(75, 24);
+            this.runAtI.Size = new System.Drawing.Size(92, 29);
             this.runAtI.TabIndex = 9;
             this.runAtI.Text = "Run At";
             this.runAtI.UseVisualStyleBackColor = true;
@@ -211,18 +214,18 @@
             // isRedeemLimitedI
             // 
             this.isRedeemLimitedI.AutoSize = true;
-            this.isRedeemLimitedI.Location = new System.Drawing.Point(25, 190);
-            this.isRedeemLimitedI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.isRedeemLimitedI.Location = new System.Drawing.Point(31, 238);
+            this.isRedeemLimitedI.Margin = new System.Windows.Forms.Padding(2);
             this.isRedeemLimitedI.Name = "isRedeemLimitedI";
-            this.isRedeemLimitedI.Size = new System.Drawing.Size(145, 24);
+            this.isRedeemLimitedI.Size = new System.Drawing.Size(172, 29);
             this.isRedeemLimitedI.TabIndex = 10;
             this.isRedeemLimitedI.Text = "Limit Redeem to ";
             this.isRedeemLimitedI.UseVisualStyleBackColor = true;
             // 
             // redeemNumberI
             // 
-            this.redeemNumberI.Location = new System.Drawing.Point(167, 190);
-            this.redeemNumberI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.redeemNumberI.Location = new System.Drawing.Point(209, 238);
+            this.redeemNumberI.Margin = new System.Windows.Forms.Padding(2);
             this.redeemNumberI.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -234,7 +237,7 @@
             0,
             0});
             this.redeemNumberI.Name = "redeemNumberI";
-            this.redeemNumberI.Size = new System.Drawing.Size(74, 27);
+            this.redeemNumberI.Size = new System.Drawing.Size(92, 31);
             this.redeemNumberI.TabIndex = 11;
             this.redeemNumberI.Value = new decimal(new int[] {
             1,
@@ -244,6 +247,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.testI);
             this.panel2.Controls.Add(this.toProcessL);
             this.panel2.Controls.Add(this.label14);
             this.panel2.Controls.Add(this.failedL);
@@ -277,25 +281,101 @@
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1355, 388);
+            this.panel2.Size = new System.Drawing.Size(1694, 485);
             this.panel2.TabIndex = 3;
+            // 
+            // toProcessL
+            // 
+            this.toProcessL.AutoSize = true;
+            this.toProcessL.Location = new System.Drawing.Point(751, 432);
+            this.toProcessL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.toProcessL.Name = "toProcessL";
+            this.toProcessL.Size = new System.Drawing.Size(0, 25);
+            this.toProcessL.TabIndex = 31;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(638, 432);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(104, 25);
+            this.label14.TabIndex = 30;
+            this.label14.Text = "To Process :";
+            // 
+            // failedL
+            // 
+            this.failedL.AutoSize = true;
+            this.failedL.Location = new System.Drawing.Point(534, 432);
+            this.failedL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.failedL.Name = "failedL";
+            this.failedL.Size = new System.Drawing.Size(0, 25);
+            this.failedL.TabIndex = 29;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(456, 432);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 25);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "Failed :";
+            // 
+            // successL
+            // 
+            this.successL.AutoSize = true;
+            this.successL.Location = new System.Drawing.Point(378, 432);
+            this.successL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.successL.Name = "successL";
+            this.successL.Size = new System.Drawing.Size(0, 25);
+            this.successL.TabIndex = 27;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(288, 432);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(82, 25);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Success :";
+            // 
+            // totalEntriesL
+            // 
+            this.totalEntriesL.AutoSize = true;
+            this.totalEntriesL.Location = new System.Drawing.Point(246, 432);
+            this.totalEntriesL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.totalEntriesL.Name = "totalEntriesL";
+            this.totalEntriesL.Size = new System.Drawing.Size(0, 25);
+            this.totalEntriesL.TabIndex = 25;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(118, 432);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(115, 25);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "Total Entries :";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(540, 144);
+            this.label7.Location = new System.Drawing.Point(675, 180);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 20);
+            this.label7.Size = new System.Drawing.Size(74, 25);
             this.label7.TabIndex = 23;
             this.label7.Text = "Threads";
             // 
             // threadsI
             // 
-            this.threadsI.Location = new System.Drawing.Point(462, 142);
-            this.threadsI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.threadsI.Location = new System.Drawing.Point(578, 178);
+            this.threadsI.Margin = new System.Windows.Forms.Padding(2);
             this.threadsI.Maximum = new decimal(new int[] {
             30,
             0,
@@ -307,7 +387,7 @@
             0,
             0});
             this.threadsI.Name = "threadsI";
-            this.threadsI.Size = new System.Drawing.Size(74, 27);
+            this.threadsI.Size = new System.Drawing.Size(92, 31);
             this.threadsI.TabIndex = 22;
             this.threadsI.Value = new decimal(new int[] {
             1,
@@ -318,10 +398,10 @@
             // LoopI
             // 
             this.LoopI.AutoSize = true;
-            this.LoopI.Location = new System.Drawing.Point(618, 291);
-            this.LoopI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LoopI.Location = new System.Drawing.Point(772, 364);
+            this.LoopI.Margin = new System.Windows.Forms.Padding(2);
             this.LoopI.Name = "LoopI";
-            this.LoopI.Size = new System.Drawing.Size(256, 24);
+            this.LoopI.Size = new System.Drawing.Size(305, 29);
             this.LoopI.TabIndex = 21;
             this.LoopI.Text = "Loop between entries of same file";
             this.LoopI.UseVisualStyleBackColor = true;
@@ -329,10 +409,10 @@
             // SkipTheFailedI
             // 
             this.SkipTheFailedI.AutoSize = true;
-            this.SkipTheFailedI.Location = new System.Drawing.Point(365, 291);
-            this.SkipTheFailedI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SkipTheFailedI.Location = new System.Drawing.Point(456, 364);
+            this.SkipTheFailedI.Margin = new System.Windows.Forms.Padding(2);
             this.SkipTheFailedI.Name = "SkipTheFailedI";
-            this.SkipTheFailedI.Size = new System.Drawing.Size(149, 24);
+            this.SkipTheFailedI.Size = new System.Drawing.Size(177, 29);
             this.SkipTheFailedI.TabIndex = 20;
             this.SkipTheFailedI.Text = "Skip failed entries";
             this.SkipTheFailedI.UseVisualStyleBackColor = true;
@@ -340,10 +420,10 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 294);
+            this.label6.Location = new System.Drawing.Point(31, 368);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 20);
+            this.label6.Size = new System.Drawing.Size(61, 25);
             this.label6.TabIndex = 19;
             this.label6.Text = "Stars#";
             // 
@@ -354,19 +434,19 @@
             this.starsCountI.Items.AddRange(new object[] {
             "Random 4-5",
             "5"});
-            this.starsCountI.Location = new System.Drawing.Point(94, 292);
-            this.starsCountI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.starsCountI.Location = new System.Drawing.Point(118, 365);
+            this.starsCountI.Margin = new System.Windows.Forms.Padding(2);
             this.starsCountI.Name = "starsCountI";
-            this.starsCountI.Size = new System.Drawing.Size(196, 28);
+            this.starsCountI.Size = new System.Drawing.Size(244, 33);
             this.starsCountI.TabIndex = 18;
             // 
             // loopFilesI
             // 
             this.loopFilesI.AutoSize = true;
-            this.loopFilesI.Location = new System.Drawing.Point(618, 244);
-            this.loopFilesI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.loopFilesI.Location = new System.Drawing.Point(772, 305);
+            this.loopFilesI.Margin = new System.Windows.Forms.Padding(2);
             this.loopFilesI.Name = "loopFilesI";
-            this.loopFilesI.Size = new System.Drawing.Size(157, 24);
+            this.loopFilesI.Size = new System.Drawing.Size(187, 29);
             this.loopFilesI.TabIndex = 17;
             this.loopFilesI.Text = "Loop between files";
             this.loopFilesI.UseVisualStyleBackColor = true;
@@ -374,43 +454,43 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(443, 247);
+            this.label5.Location = new System.Drawing.Point(554, 309);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(140, 20);
+            this.label5.Size = new System.Drawing.Size(168, 25);
             this.label5.TabIndex = 16;
             this.label5.Text = "Hours between files";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(246, 191);
+            this.label4.Location = new System.Drawing.Point(308, 239);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(181, 20);
+            this.label4.Size = new System.Drawing.Size(221, 25);
             this.label4.TabIndex = 15;
             this.label4.Text = "Promotion Codes next run";
             // 
             // delayBetweenFilesI
             // 
-            this.delayBetweenFilesI.Location = new System.Drawing.Point(365, 246);
-            this.delayBetweenFilesI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.delayBetweenFilesI.Location = new System.Drawing.Point(456, 308);
+            this.delayBetweenFilesI.Margin = new System.Windows.Forms.Padding(2);
             this.delayBetweenFilesI.Maximum = new decimal(new int[] {
             9999,
             0,
             0,
             0});
             this.delayBetweenFilesI.Name = "delayBetweenFilesI";
-            this.delayBetweenFilesI.Size = new System.Drawing.Size(74, 27);
+            this.delayBetweenFilesI.Size = new System.Drawing.Size(92, 31);
             this.delayBetweenFilesI.TabIndex = 14;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 245);
+            this.label3.Location = new System.Drawing.Point(31, 306);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 20);
+            this.label3.Size = new System.Drawing.Size(56, 25);
             this.label3.TabIndex = 13;
             this.label3.Text = "Delay";
             // 
@@ -426,102 +506,56 @@
             "30 min",
             "40 min",
             "60 min"});
-            this.delayI.Location = new System.Drawing.Point(94, 245);
-            this.delayI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.delayI.Location = new System.Drawing.Point(118, 306);
+            this.delayI.Margin = new System.Windows.Forms.Padding(2);
             this.delayI.Name = "delayI";
-            this.delayI.Size = new System.Drawing.Size(196, 28);
+            this.delayI.Size = new System.Drawing.Size(244, 33);
             this.delayI.TabIndex = 12;
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.logT);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 388);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Location = new System.Drawing.Point(0, 485);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(16, 16, 0, 0);
-            this.panel4.Size = new System.Drawing.Size(1355, 340);
+            this.panel4.Padding = new System.Windows.Forms.Padding(20, 20, 0, 0);
+            this.panel4.Size = new System.Drawing.Size(1694, 425);
             this.panel4.TabIndex = 4;
             // 
-            // label8
+            // testI
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(94, 346);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 20);
-            this.label8.TabIndex = 24;
-            this.label8.Text = "Total Entries :";
+            this.testI.AutoSize = true;
+            this.testI.Location = new System.Drawing.Point(1322, 52);
+            this.testI.Margin = new System.Windows.Forms.Padding(2);
+            this.testI.Name = "testI";
+            this.testI.Size = new System.Drawing.Size(68, 29);
+            this.testI.TabIndex = 32;
+            this.testI.Text = "Test";
+            this.testI.UseVisualStyleBackColor = true;
             // 
-            // totalEntriesL
+            // clearAllButton
             // 
-            this.totalEntriesL.AutoSize = true;
-            this.totalEntriesL.Location = new System.Drawing.Point(197, 346);
-            this.totalEntriesL.Name = "totalEntriesL";
-            this.totalEntriesL.Size = new System.Drawing.Size(0, 20);
-            this.totalEntriesL.TabIndex = 25;
-            // 
-            // successL
-            // 
-            this.successL.AutoSize = true;
-            this.successL.Location = new System.Drawing.Point(302, 346);
-            this.successL.Name = "successL";
-            this.successL.Size = new System.Drawing.Size(0, 20);
-            this.successL.TabIndex = 27;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(230, 346);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(66, 20);
-            this.label10.TabIndex = 26;
-            this.label10.Text = "Success :";
-            // 
-            // failedL
-            // 
-            this.failedL.AutoSize = true;
-            this.failedL.Location = new System.Drawing.Point(427, 346);
-            this.failedL.Name = "failedL";
-            this.failedL.Size = new System.Drawing.Size(0, 20);
-            this.failedL.TabIndex = 29;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(365, 346);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(55, 20);
-            this.label12.TabIndex = 28;
-            this.label12.Text = "Failed :";
-            // 
-            // toProcessL
-            // 
-            this.toProcessL.AutoSize = true;
-            this.toProcessL.Location = new System.Drawing.Point(601, 346);
-            this.toProcessL.Name = "toProcessL";
-            this.toProcessL.Size = new System.Drawing.Size(0, 20);
-            this.toProcessL.TabIndex = 31;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(510, 346);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(85, 20);
-            this.label14.TabIndex = 30;
-            this.label14.Text = "To Process :";
+            this.clearAllButton.Location = new System.Drawing.Point(11, 44);
+            this.clearAllButton.Margin = new System.Windows.Forms.Padding(2);
+            this.clearAllButton.Name = "clearAllButton";
+            this.clearAllButton.Size = new System.Drawing.Size(259, 48);
+            this.clearAllButton.TabIndex = 1;
+            this.clearAllButton.Text = "Clear all results";
+            this.clearAllButton.UseVisualStyleBackColor = true;
+            this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1355, 773);
+            this.ClientSize = new System.Drawing.Size(1694, 966);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "AudibleImprovedBot 1.01";
+            this.Text = "AudibleImprovedBot 1.02";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
@@ -575,5 +609,7 @@
         private Label label10;
         private Label totalEntriesL;
         private Label label8;
+        private Button clearAllButton;
+        private CheckBox testI;
     }
 }

@@ -16,4 +16,5 @@ public class Config
     public bool DoLoop { get; set; }
     public bool DoLoopFiles { get; set; }
     public bool SkipFailedEntries { get; set; }
+    public bool Test { get; set; }
 }

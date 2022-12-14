@@ -25,9 +25,7 @@ public class Scraper
             if (next < DateTime.Now)
                 throw new KnownException("Error,  the scheduled date has passed");
 
-            var toSleep = (int)(next - DateTime.Now).TotalMilliseconds;
-            Notifier.Display($"Will start the run at {next:G}");
-            await Task.Delay(toSleep);
+            await Delay(next, "Waiting for Scheduled Run");
         }
     }
 
@@ -86,11 +84,12 @@ public class Scraper
             {
                 return f == 0;
             }
+
             if (f == 0)
             {
                 Notifier.Display("Loop is On , but there is no failed entries, so we going to break");
                 return true;
-            } 
+            }
         } while (true);
 
         return false;
@@ -102,7 +101,7 @@ public class Scraper
         var files = Directory.GetFiles(_config.InputFolder).ToList();
         foreach (var t in files)
         {
-            var inputs= t.ReadFromExcel<Input>();
+            var inputs = t.ReadFromExcel<Input>();
             _static.TotalEntries += inputs.Count;
             foreach (var input in inputs)
             {
@@ -117,7 +116,19 @@ public class Scraper
 
         OnStaticChange?.Invoke(this, _static);
     }
-    
+
+    async Task Delay(DateTime nextWakeUp, string message)
+    {
+        Notifier.Display($"{message},We will continue At {nextWakeUp:G}");
+        do
+        {
+            var d = DateTime.Now;
+            if (d >= nextWakeUp)
+                break;
+            await Task.Delay(1000);
+        } while (true);
+    }
+
     async Task ProcessFiles()
     {
         await WaitForScheduledDate();
@@ -129,10 +140,10 @@ public class Scraper
             for (var f = 0; f < files.Count; f++)
             {
                 _currentFile = files[f];
-                var success=await LoopFileIfNeeded();
+                var success = await LoopFileIfNeeded();
                 if (success)
                     completed++;
-                
+
                 if (completed == files.Count)
                 {
                     Notifier.Display("We finished all files with 0 error on each");
@@ -141,18 +152,16 @@ public class Scraper
 
                 if (f != files.Count - 1)
                 {
-                    if (!_config.DoLoopFiles)
+                    if (_config.DoLoopFiles)
                     {
-                        Notifier.Display($"We will wait for {_config.HoursBetweenFiles} hours till next file");
-                        await Task.Delay(_config.HoursBetweenFiles * 1000 * 60 * 60);
+                        await Delay(DateTime.Now.AddHours(_config.HoursBetweenFiles), "Waiting for next file");
                     }
                 }
                 else
                 {
                     if (!_config.DoLoopFiles)
                         return;
-                    Notifier.Display($"We will wait for {_config.HoursBetweenFiles} hours till next file (loop)");
-                    await Task.Delay(_config.HoursBetweenFiles * 1000 * 60 * 60);
+                    await Delay(DateTime.Now.AddHours(_config.HoursBetweenFiles), "Waiting for next Loop");
                 }
             }
         } while (true);
@@ -175,7 +184,7 @@ public class Scraper
             {
                 var item = _inputs[i];
                 i++;
-                if(item.Result=="success" || (item.Result == "failed" && _config.SkipFailedEntries)) continue;
+                if (item.Result == "success" || (item.Result == "failed" && _config.SkipFailedEntries)) continue;
                 var s = new AudibleService(item, _browser, _config);
                 tasks.Add(s.Work());
             }
@@ -196,19 +205,35 @@ public class Scraper
         return (success, fails);
     }
 
+    public async Task ClearResults(Config config)
+    {
+        _config = config;
+        Notifier.Display($"start clearing all results");
+        var files = Directory.GetFiles(_config.InputFolder).ToList();
+        foreach (var t in files)
+        {
+            var inputs = t.ReadFromExcel<Input>();
+            foreach (var input in inputs)
+            {
+                input.Result = null;
+                input.Message = null;
+            }
+
+            await inputs.SaveToExcel(t);
+        }
+
+        GetStatistic();
+        Notifier.Display($"Completed");
+    }
+
     public async Task MainWork(Config config)
     {
         Notifier.Display("Start working");
         _config = config;
         CaptchaService.TwoCaptchaKey = config.TwoCaptchaKey;
-       // await StartBrowser();
+        if (!_config.Test)
+            await StartBrowser();
         await ProcessFiles();
         Notifier.Display("Work completed");
-        return;
-        //await Attach();
-        // await ParallelWork();
-        // return;
-        //_audibleServices.Add(new AudibleService(inputs[0],_browser,config));
-        // _audibleServices.Add(new AudibleService(inputs[1],_browser,config));
     }
 }

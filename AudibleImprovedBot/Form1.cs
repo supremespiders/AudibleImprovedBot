@@ -37,7 +37,8 @@ namespace AudibleImprovedBot
                 DoLoopFiles = loopFilesI.Checked,
                 HoursBetweenFiles = (int)delayBetweenFilesI.Value,
                 SkipFailedEntries = SkipTheFailedI.Checked,
-                MaxThreads = (int)threadsI.Value
+                MaxThreads = (int)threadsI.Value,
+                Test = testI.Checked
             };
             try
             {
@@ -323,6 +324,42 @@ namespace AudibleImprovedBot
             catch (Exception exception)
             {
                ErrorLog(exception.ToString());
+            }
+        }
+
+        private async void clearAllButton_Click(object sender, EventArgs e)
+        {
+            logT.Text = "";
+            SaveConfig();
+            var c = new Config()
+            {
+                InputFolder = inputI.Text,
+                DoRunAt = runAtI.Checked,
+                RunAt = dateTimeI.Value,
+                Stars = starsCountI.SelectedIndex,
+                TwoCaptchaKey = twoCaptchaKeyI.Text,
+                DoLimitRedeem = isRedeemLimitedI.Checked,
+                TargetSuccessPerFile = (int)redeemNumberI.Value,
+                DoLoop = LoopI.Checked,
+                DoLoopFiles = loopFilesI.Checked,
+                HoursBetweenFiles = (int)delayBetweenFilesI.Value,
+                SkipFailedEntries = SkipTheFailedI.Checked,
+                MaxThreads = (int)threadsI.Value,
+                Test = testI.Checked
+            };
+            try
+            {
+                await _scraper.ClearResults(c);
+            }
+            catch (KnownException ex)
+            {
+                ErrorLog(ex.Message);
+                Display(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                ErrorLog(ex.ToString());
+                Display(ex.Message);
             }
         }
     }
