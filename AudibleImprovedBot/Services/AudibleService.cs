@@ -233,18 +233,25 @@ public class AudibleService : BrowserBase
         p = p.Context.Pages.First(x => x.Url.Contains("/webplaye"));
         //p = p.Context.Pages.Last();
         await Click("//div[contains(@class,'adblCloudPlayerSpeedNarration')]", 10000);
-        await Click("(//div[@class='bc-radio'])[last()]");
-        await Click("//i[contains(@class,'chapterMenuIcon')]");
-        var lastChapter = await Text("(//span[@id='chapter-menu-trigger'])[last()]", 1000, false);
-        await Click("//a[@id='adbl-cp-chapters-close-icon']");
+        //await Task.Delay(3000);
+        //await Click("(//div[@class='bc-radio'])[last()]");
+        await Click("(//div[@class='bc-radio'])[last()]",10000);
 
+        string lastChapter=null;
+        if (await Exist("//i[contains(@class,'chapterMenuIcon')]",5000,true))
+        {
+            await Click("//i[contains(@class,'chapterMenuIcon')]");
+            lastChapter = await Text("(//span[@id='chapter-menu-trigger'])[last()]", 1000, false);
+            await Click("//a[@id='adbl-cp-chapters-close-icon']");
+        }
+        
         bool weAreOnLastChapter = false;
         string last = null;
         do
         {
             var chapterTitle = await Text("//span[@id='cp-Top-chapter-display']");
             var timeLeft = await Text("//div[@id='adblMediaBarTimeLeft']");
-            if (chapterTitle == lastChapter) weAreOnLastChapter = true;
+            if (lastChapter==null || chapterTitle == lastChapter) weAreOnLastChapter = true;
             Notifier.Display($"{_input.MailAccountAudible} Chapter title : {chapterTitle} , Time Left : {timeLeft}", false);
             await Task.Delay(5000);
             if (chapterTitle == null || timeLeft == last || (weAreOnLastChapter && chapterTitle != lastChapter) || (chapterTitle == lastChapter && timeLeft == "– 00:00"))
@@ -316,6 +323,7 @@ public class AudibleService : BrowserBase
     private Random _rnd = new Random();
     public async Task<bool> Work()
     {
+        if (_input.MailAccountAudible != "CruzJNelson@topreadersstudio.com") return false;
         if (_config.Test)
         {
             Notifier.Log($"{_input.MailAccountAudible} start working");
@@ -327,7 +335,8 @@ public class AudibleService : BrowserBase
         }
         try
         {
-            await StartContext(_browser, _input.Proxy);
+            //await StartContext(_browser, _input.Proxy);
+            await StartBrowser("temp",9333,"https://api.ipify.org?format=json", _input.Proxy,true);
             //await GetContext(_browser); 
             await VerifyIp();
             await LoginToAmazon();
@@ -355,7 +364,11 @@ public class AudibleService : BrowserBase
         finally
         {
             if (p != null)
-                await p.Context.DisposeAsync();
+            {
+                _playwright.Dispose();
+                proc.Kill();
+                //await p.Context.DisposeAsync();
+            }
         }
 
         return false;

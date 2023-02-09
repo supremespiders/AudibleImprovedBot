@@ -36,6 +36,7 @@ public class Scraper
         _playwright = await Playwright.CreateAsync();
         _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions()
         {
+            Channel = "chrome",
             Headless = false,
             Proxy = new Proxy
             {
