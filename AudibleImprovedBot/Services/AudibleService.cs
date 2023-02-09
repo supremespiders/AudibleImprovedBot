@@ -323,7 +323,7 @@ public class AudibleService : BrowserBase
     private Random _rnd = new Random();
     public async Task<bool> Work()
     {
-        if (_input.MailAccountAudible != "CruzJNelson@topreadersstudio.com") return false;
+        //if (_input.MailAccountAudible != "CruzJNelson@topreadersstudio.com") return false;
         if (_config.Test)
         {
             Notifier.Log($"{_input.MailAccountAudible} start working");
