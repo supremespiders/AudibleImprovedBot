@@ -232,8 +232,8 @@ public class Scraper
         Notifier.Display("Start working");
         _config = config;
         CaptchaService.TwoCaptchaKey = config.TwoCaptchaKey;
-        if (!_config.Test)
-            await StartBrowser();
+        // if (!_config.Test)
+        //     await StartBrowser();
         await ProcessFiles();
         Notifier.Display("Work completed");
     }

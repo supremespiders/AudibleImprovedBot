@@ -336,7 +336,7 @@ public class AudibleService : BrowserBase
         try
         {
             //await StartContext(_browser, _input.Proxy);
-            await StartBrowser("temp",9333,"https://api.ipify.org?format=json", _input.Proxy,true);
+            await StartBrowser("temp",int.Parse(await File.ReadAllTextAsync("port")),"https://api.ipify.org?format=json", _input.Proxy,true);
             //await GetContext(_browser); 
             await VerifyIp();
             await LoginToAmazon();
