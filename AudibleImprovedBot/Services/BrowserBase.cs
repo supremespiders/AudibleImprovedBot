@@ -108,7 +108,7 @@ hairline.js";
         }
     }
     
-      private static void CreateProxyExtension(string proxy, string prefix)
+      private static async Task CreateProxyExtension(string proxy, string prefix)
         {
             var pr = proxy.Split(":");
             if (pr.Length != 4) throw new KnownException($"Unknown format of proxy : {proxy}");
@@ -117,25 +117,25 @@ hairline.js";
             var username = pr[2];
             var pass = pr[3];
             var dir = $"{prefix}Ex";
-            if (Directory.Exists(dir)) dir.DeleteDirectory();
+            if (Directory.Exists(dir)) await dir.DeleteDirectory();
             Directory.CreateDirectory(dir);
             var manifest = "{\r\n        \"version\": \"0.1.0\",\r\n        \"manifest_version\": 2,\r\n        \"name\": \"%proxy%\",\r\n        \"permissions\": [\r\n            \"proxy\",\r\n            \"tabs\",\r\n            \"unlimitedStorage\",\r\n            \"storage\",\r\n            \"<all_urls>\",\r\n            \"webRequest\",\r\n            \"webRequestBlocking\"\r\n        ],\r\n        \"background\": {\r\n            \"scripts\": [\"background.js\"]\r\n        },\r\n        \"minimum_chrome_version\":\"22.0.0\"\r\n    }";
             var js = "var config = {\r\n    mode: \"fixed_servers\",\r\n    rules: {\r\n      singleProxy: {\r\n        scheme: \"http\",\r\n        host: \"" + ip + "\",\r\n        port: parseInt(" + port + ")\r\n      },\r\n      bypassList: [\"foobar.com\"]\r\n    }\r\n  };\r\n\r\nchrome.proxy.settings.set({value: config, scope: \"regular\"}, function() {});\r\n\r\nfunction callbackFn(details) {\r\n    return {\r\n        authCredentials: {\r\n            username: \"" + username + "\",\r\n            password: \"" + pass + "\"\r\n        }\r\n    };\r\n}\r\n\r\nchrome.webRequest.onAuthRequired.addListener(\r\n        callbackFn,\r\n        {urls: [\"<all_urls>\"]},\r\n        ['blocking']\r\n);";
-            File.WriteAllText($"{dir}/manifest.json", manifest);
-            File.WriteAllText($"{dir}/background.js", js);
+            await File.WriteAllTextAsync($"{dir}/manifest.json", manifest);
+            await File.WriteAllTextAsync($"{dir}/background.js", js);
         }
 
         protected async Task StartBrowser(string prefix, int port, string url, string proxy = null, bool deleteTemp = false)
         {
+            if(deleteTemp && Directory.Exists(prefix))
+               await prefix.DeleteDirectory();
+            
             proc = new Process();
             if (proxy != null)
             {
-                CreateProxyExtension(proxy, prefix);
+                await CreateProxyExtension(proxy, prefix);
             }
             
-            if(deleteTemp && Directory.Exists(prefix))
-                prefix.DeleteDirectory();
-
             Directory.CreateDirectory(prefix);
             proc.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
             if (!File.Exists(proc.StartInfo.FileName))
