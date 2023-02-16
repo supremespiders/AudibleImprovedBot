@@ -11,7 +11,7 @@ public static class HttpClientExtensions
         await using var fs = new FileStream(path, FileMode.Create);
         await response.Content.CopyToAsync(fs);
     }
-
+    
     public static async Task DeleteDirectory(this string targetDir)
     {
         var lastError = "";

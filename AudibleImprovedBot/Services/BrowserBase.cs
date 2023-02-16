@@ -133,7 +133,7 @@ hairline.js";
             proc = new Process();
             if (proxy != null)
             {
-                await CreateProxyExtension(proxy, prefix);
+               await CreateProxyExtension(proxy, prefix);
             }
             
             Directory.CreateDirectory(prefix);

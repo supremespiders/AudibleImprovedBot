@@ -97,7 +97,7 @@ public class AudibleService : BrowserBase
         await Fill("//fieldset[@data-rel='webmail']//input[@name='password']", _input.EmailPassword);
         await Click("//button[text()='Login']");
         var firstEmailS = "(//span[@class='subject'])[1]";
-        if (!await Exist(firstEmailS))
+        if (!await Exist(firstEmailS,15000))
         {
             if (!await Exist("//div[@data-sitekey]")) throw new KnownException($"Failed to login to email service and can't find captcha");
             var key = await p.Locator("//div[@data-sitekey]").GetAttributeAsync("data-sitekey");
@@ -116,7 +116,7 @@ public class AudibleService : BrowserBase
         var frame = p.FrameLocator("#messagecontframe");
         var link = await frame.Locator("//a[text()=' Approve or Deny.']").GetAttributeAsync("href", new LocatorGetAttributeOptions() { Timeout = 15000 });
         if (link == null) throw new KnownException($"{_input.MailAccountAudible} Failed to retrieve link from approved link node");
-        await p.GotoAsync(link);
+        await Navigate(link);
         await Click("//input[@name='customerResponseApproveButton']");
         if (!await Exist("//span[text()='Thank you. Sign-in attempt was approved.']", 3000) &&
             !await Exist("//span[text()='Grazie, Tentativo di accesso è stato approvato.']", 500) &&
@@ -124,6 +124,18 @@ public class AudibleService : BrowserBase
             throw new KnownException("Failed to approve the access");
         Notifier.Log($"{_input.MailAccountAudible} Access approved");
         p = p2;
+    }
+
+    private async Task Navigate(string url)
+    {
+        try
+        {
+            await p.GotoAsync(url);
+        }
+        catch (Exception e)
+        {
+            await p.GotoAsync(url);
+        }
     }
 
     private async Task<string> Redeem()
@@ -238,9 +250,9 @@ public class AudibleService : BrowserBase
         await Click("(//div[@class='bc-radio'])[last()]",10000);
 
         string lastChapter=null;
-        if (await Exist("//i[contains(@class,'chapterMenuIcon')]",5000,true))
+        if (await Exist("//button[contains(@class,'bc-icon-chapters')]",5000,true))
         {
-            await Click("//i[contains(@class,'chapterMenuIcon')]");
+            await Click("//button[contains(@class,'bc-icon-chapters')]");
             lastChapter = await Text("(//span[@id='chapter-menu-trigger'])[last()]", 1000, false);
             await Click("//a[@id='adbl-cp-chapters-close-icon']");
         }
@@ -335,9 +347,10 @@ public class AudibleService : BrowserBase
         }
         try
         {
-            //await StartContext(_browser, _input.Proxy);
-            await StartBrowser("temp",int.Parse(await File.ReadAllTextAsync("port.txt")),"https://api.ipify.org?format=json", _input.Proxy,true);
+            // await StartContext(_browser, _input.Proxy);
+           await StartBrowser("temp",int.Parse(await File.ReadAllTextAsync("port.txt")),"https://api.ipify.org?format=json", _input.Proxy,true);
             //await GetContext(_browser); 
+            
             await VerifyIp();
             await LoginToAmazon();
             // return;
@@ -366,7 +379,7 @@ public class AudibleService : BrowserBase
             if (p != null)
             {
                 _playwright.Dispose();
-                proc.Kill();
+                proc?.Kill();
                 //await p.Context.DisposeAsync();
             }
         }
