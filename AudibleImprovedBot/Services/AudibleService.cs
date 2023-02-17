@@ -250,13 +250,13 @@ public class AudibleService : BrowserBase
         await Click("(//div[@class='bc-radio'])[last()]",10000);
 
         string lastChapter=null;
-        if (await Exist("//button[contains(@class,'bc-icon-chapters')]",5000,true))
+        if (await Exist("//button[@class='chapterMenuIcon']",5000,true))
         {
-            await Click("//button[contains(@class,'bc-icon-chapters')]");
-            lastChapter = await Text("(//span[@id='chapter-menu-trigger'])[last()]", 1000, false);
+            await Click("//button[@class='chapterMenuIcon']");
+            lastChapter = (await Text("(//span[@id='chapter-menu-trigger'])[last()]", 1000, false)).Replace("\n","").Trim();
             await Click("//a[@id='adbl-cp-chapters-close-icon']");
         }
-        
+        Notifier.Log($"Last chapter : {lastChapter}");
         bool weAreOnLastChapter = false;
         string last = null;
         do
