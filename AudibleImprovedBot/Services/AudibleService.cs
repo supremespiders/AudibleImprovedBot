@@ -88,7 +88,8 @@ public class AudibleService : BrowserBase
     private async Task VerifyByEmailIfNeeded()
     {
         if (!await Exist("#resend-transaction-approval")) return;
-        Notifier.Display($"{_input.MailAccountAudible} Verification by email needed");
+        Notifier.Display($"{_input.MailAccountAudible} Verification by email needed, we will wait 5 sec just in case");
+        await Task.Delay(5000);
         var p2 = p;
         p = await p.Context.NewPageAsync();
         await p.GotoAsync("https://cloud-e83ca2.managed-vps.net/webmail");
@@ -111,6 +112,7 @@ public class AudibleService : BrowserBase
         if (message == null || !message.Contains("Sign-in")) throw new KnownException($"{_input.MailAccountAudible} Last message is not Amazon security alert: Sign-in attempt");
         await Click(firstEmailS);
 
+        await Task.Delay(3000);
         // if (!await Exist("//a[text()=' Approve or Deny.']")) 
         //     throw new KnownException($"{_input.MailAccountAudible} Could not locate the approve link");
         var frame = p.FrameLocator("#messagecontframe");
@@ -118,9 +120,9 @@ public class AudibleService : BrowserBase
         if (link == null) throw new KnownException($"{_input.MailAccountAudible} Failed to retrieve link from approved link node");
         await Navigate(link);
         await Click("//input[@name='customerResponseApproveButton']");
-        if (!await Exist("//span[text()='Thank you. Sign-in attempt was approved.']", 3000) &&
-            !await Exist("//span[text()='Grazie, Tentativo di accesso è stato approvato.']", 500) &&
-            !await Exist("//a[contains(@href,'/signout')]", 500))
+        if (!await Exist("//span[text()='Thank you. Sign-in attempt was approved.']", 15000) &&
+            !await Exist("//span[text()='Grazie, Tentativo di accesso è stato approvato.']", 3000) &&
+            !await Exist("//a[contains(@href,'/signout')]", 3000))
             throw new KnownException("Failed to approve the access");
         Notifier.Log($"{_input.MailAccountAudible} Access approved");
         p = p2;
