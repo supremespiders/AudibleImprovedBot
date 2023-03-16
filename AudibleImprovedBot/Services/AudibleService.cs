@@ -1,4 +1,5 @@
-﻿using airbnb.comLister.Models;
+﻿using System.Diagnostics;
+using airbnb.comLister.Models;
 using AudibleImprovedBot.Models;
 using Microsoft.Playwright;
 using Newtonsoft.Json.Linq;
@@ -381,14 +382,14 @@ public class AudibleService : BrowserBase
             if (p != null)
             {
                 _playwright.Dispose();
-                proc?.Kill();
+                proc?.Kill(true);
+                await Task.Delay(5000);
                 //await p.Context.DisposeAsync();
             }
         }
 
         return false;
     }
-
     private async Task HandleError(string error)
     {
         Notifier.Error(error);

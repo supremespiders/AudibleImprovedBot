@@ -17,13 +17,13 @@ public static class HttpClientExtensions
         var lastError = "";
         for (int i = 0; i < 6; i++)
         {
-            if (i == 5)
-            {
-                var instances = Process.GetProcessesByName("chrome");
-                foreach (var instance in instances)
-                    instance.Kill();
-                await Task.Delay(5000);
-            }
+            // if (i == 5)
+            // {
+            //     var instances = Process.GetProcessesByName("chrome");
+            //     foreach (var instance in instances)
+            //         instance.Kill();
+            //     await Task.Delay(5000);
+            // }
 
             try
             {
