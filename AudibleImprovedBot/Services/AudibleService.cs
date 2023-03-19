@@ -39,7 +39,7 @@ public class AudibleService : BrowserBase
         await Click("//*[@id='truste-consent-button']", 3000, true);
         await Click("//a[@id='att_lightbox_close']", 1000, true);
         // await Task.Delay(10000);
-        await Click("//a[text()='Sign In']", 30000);
+        await Click("//a[contains(text(),'Sign In')]", 30000);
         await SolveImageCaptchaIfNeeded();
         await Fill("//input[@id='ap_email']", _input.MailAccountAudible, 30000);
         await Fill("//input[@id='ap_password']", _input.AudiblePassword);
