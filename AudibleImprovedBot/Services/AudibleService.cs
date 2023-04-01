@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net;
 using airbnb.comLister.Models;
 using AudibleImprovedBot.Models;
 using Microsoft.Playwright;
@@ -13,6 +14,11 @@ public class AudibleService : BrowserBase
     private readonly string _libLink;
     private readonly Config _config;
     private readonly Random _random = new();
+
+    private HttpClient _client = new HttpClient(new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.All })
+    {
+        Timeout = TimeSpan.FromSeconds(20)
+    };
 
     public AudibleService(Input input, IBrowser browser, Config config)
     {
@@ -99,7 +105,7 @@ public class AudibleService : BrowserBase
         await Fill("//fieldset[@data-rel='webmail']//input[@name='password']", _input.EmailPassword);
         await Click("//button[text()='Login']");
         var firstEmailS = "(//span[@class='subject'])[1]";
-        if (!await Exist(firstEmailS,15000))
+        if (!await Exist(firstEmailS, 15000))
         {
             if (!await Exist("//div[@data-sitekey]")) throw new KnownException($"Failed to login to email service and can't find captcha");
             var key = await p.Locator("//div[@data-sitekey]").GetAttributeAsync("data-sitekey");
@@ -147,6 +153,20 @@ public class AudibleService : BrowserBase
         await Fill("//input[@id='redeem-text-box']", _input.PromoCode);
         await Click("//*[@id='redeem-button']");
         //await ForAnyCondition(10000, "//div[@data-asin]", "//*[@id='error-text']");
+        if (await Exist("//input[@name='fullName']"))
+        {
+            Notifier.Log($"{_input.MailAccountAudible} Start filling address");
+            var address = await GetAddress(_input.Link);
+            await Fill("//input[@name='fullName']", _input.Name);
+            await Fill("//input[@name='addressLine1']", address.Street);
+            await Fill("//input[@name='zipCode']", address.Zip);
+            if (await Exist("//input[@name='phoneNumber']", 2000))
+                await Fill("//input[@name='phoneNumber']", address.Phone);
+            await Task.Delay(1000);
+            await Fill("//input[@name='city']", address.City);
+            await Click("//span[@class='bc-button bc-button-primary adbl-save-button payments-widget-wider-button payments-widget-save-and-close bc-button-inline']");
+        }
+
         if (await Exist("//div[@data-asin]", 10000)) return await p.Locator("//div[@data-asin]").GetAttributeAsync("data-asin");
         if (!await Exist("//*[@id='error-text']", 2000, true)) throw new KnownException($"{_input.MailAccountAudible} something went wrong with redeeming");
         var redeemMessage = (await p.Locator("#error-text").TextContentAsync())?.Replace("\r", "").Replace("\n", "").Trim();
@@ -250,15 +270,16 @@ public class AudibleService : BrowserBase
         await Click("//div[contains(@class,'adblCloudPlayerSpeedNarration')]", 10000);
         //await Task.Delay(3000);
         //await Click("(//div[@class='bc-radio'])[last()]");
-        await Click("(//div[@class='bc-radio'])[last()]",10000);
+        await Click("(//div[@class='bc-radio'])[last()]", 10000);
 
-        string lastChapter=null;
-        if (await Exist("//button[@class='chapterMenuIcon']",5000,true))
+        string lastChapter = null;
+        if (await Exist("//button[@class='chapterMenuIcon']", 5000, true))
         {
             await Click("//button[@class='chapterMenuIcon']");
-            lastChapter = (await Text("(//span[@id='chapter-menu-trigger'])[last()]", 1000, false)).Replace("\n","").Trim();
+            lastChapter = (await Text("(//span[@id='chapter-menu-trigger'])[last()]", 1000, false)).Replace("\n", "").Trim();
             await Click("//a[@id='adbl-cp-chapters-close-icon']");
         }
+
         Notifier.Log($"Last chapter : {lastChapter}");
         bool weAreOnLastChapter = false;
         string last = null;
@@ -266,7 +287,7 @@ public class AudibleService : BrowserBase
         {
             var chapterTitle = await Text("//span[@id='cp-Top-chapter-display']");
             var timeLeft = await Text("//div[@id='adblMediaBarTimeLeft']");
-            if (lastChapter==null || chapterTitle == lastChapter) weAreOnLastChapter = true;
+            if (lastChapter == null || chapterTitle == lastChapter) weAreOnLastChapter = true;
             Notifier.Display($"{_input.MailAccountAudible} Chapter title : {chapterTitle} , Time Left : {timeLeft}", false);
             await Task.Delay(5000);
             if (chapterTitle == null || timeLeft == last || (weAreOnLastChapter && chapterTitle != lastChapter) || (chapterTitle == lastChapter && timeLeft == "– 00:00"))
@@ -336,6 +357,27 @@ public class AudibleService : BrowserBase
     }
 
     private Random _rnd = new Random();
+
+    private async Task<Address> GetAddress(string link)
+    {
+        var html = await _client.GetStringAsync(link.Contains(".co.uk") ? "https://www.fakexy.com/fake-address-generator-uk" : "https://www.fakexy.com/");
+        var doc = new HtmlAgilityPack.HtmlDocument();
+        doc.LoadHtml(html);
+        var street = doc.DocumentNode.SelectSingleNode("//td[text()='Street']/following-sibling::*").InnerText;
+        var city = doc.DocumentNode.SelectSingleNode("//td[text()='City/Town']/following-sibling::*").InnerText;
+        var state = doc.DocumentNode.SelectSingleNode("//td[text()='State/Province/Region']/following-sibling::*")?.InnerText ?? "";
+        var zip = doc.DocumentNode.SelectSingleNode("//td[text()='Zip/Postal Code']/following-sibling::*").InnerText;
+        var phone = doc.DocumentNode.SelectSingleNode("//td[text()='Phone Number']/following-sibling::*").InnerText;
+        return new Address()
+        {
+            City = city,
+            State = state,
+            Phone = phone,
+            Street = street,
+            Zip = zip
+        };
+    }
+
     public async Task<bool> Work()
     {
         //if (_input.MailAccountAudible != "CruzJNelson@topreadersstudio.com") return false;
@@ -345,21 +387,25 @@ public class AudibleService : BrowserBase
             await Task.Delay(1000);
             var t = _rnd.Next(0, 2);
             _input.Result = (t == 0 ? "success" : "failed");
-            Notifier.Log($"{(t == 0 ? "success":"failed")}");
+            Notifier.Log($"{(t == 0 ? "success" : "failed")}");
             return t == 0;
         }
+
         try
         {
             // await StartContext(_browser, _input.Proxy);
-           await StartBrowser("temp",int.Parse(await File.ReadAllTextAsync("port.txt")),"https://api.ipify.org?format=json", _input.Proxy,true);
+            await StartBrowser("temp", int.Parse(await File.ReadAllTextAsync("port.txt")), "https://api.ipify.org?format=json", _input.Proxy, true);
             //await GetContext(_browser); 
-            
+
             await VerifyIp();
             await LoginToAmazon();
             // return;
             //await p.ReloadAsync();
             if (string.IsNullOrEmpty(_input.Asin))
+            {
                 _input.Asin = await Redeem();
+            }
+
             await MarkAsFinish();
             await ListenToBook();
             await Rate();
@@ -390,6 +436,7 @@ public class AudibleService : BrowserBase
 
         return false;
     }
+
     private async Task HandleError(string error)
     {
         Notifier.Error(error);

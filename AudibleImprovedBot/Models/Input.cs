@@ -5,6 +5,7 @@ public class Input
     public string Code { get; set; }
     public string Link { get; set; }
     public string Proxy { get; set; }
+    public string Name { get; set; }
     public string MailAccountAudible { get; set; }
     public string AudiblePassword { get; set; }
     public string PromoCode { get; set; }
