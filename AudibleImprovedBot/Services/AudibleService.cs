@@ -45,7 +45,7 @@ public class AudibleService : BrowserBase
         await Click("//*[@id='truste-consent-button']", 3000, true);
         await Click("//a[@id='att_lightbox_close']", 1000, true);
         // await Task.Delay(10000);
-        await Click("//a[contains(text(),'Sign In')]", 30000);
+        await Click("//a[contains(text(),'Sign in')]", 30000);
         await SolveImageCaptchaIfNeeded();
         await Fill("//input[@id='ap_email']", _input.MailAccountAudible, 30000);
         await Fill("//input[@id='ap_password']", _input.AudiblePassword);
@@ -394,7 +394,7 @@ public class AudibleService : BrowserBase
         try
         {
             // await StartContext(_browser, _input.Proxy);
-            await StartBrowser("temp", int.Parse(await File.ReadAllTextAsync("port.txt")), "https://api.ipify.org?format=json", _input.Proxy, true);
+            await StartBrowser("temp",Debugger.IsAttached ? 9288 : int.Parse(await File.ReadAllTextAsync("port.txt")), "https://api.ipify.org?format=json", _input.Proxy, true);
             //await GetContext(_browser); 
 
             await VerifyIp();
