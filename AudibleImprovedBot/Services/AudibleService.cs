@@ -45,7 +45,7 @@ public class AudibleService : BrowserBase
         await Click("//*[@id='truste-consent-button']", 3000, true);
         await Click("//a[@id='att_lightbox_close']", 1000, true);
         // await Task.Delay(10000);
-        await Click("//a[contains(text(),'Sign In')]", 30000);
+        await Click("//a[contains(text(),'Sign in')]", 30000);
         await SolveImageCaptchaIfNeeded();
         await Fill("//input[@id='ap_email']", _input.MailAccountAudible, 30000);
         await Fill("//input[@id='ap_password']", _input.AudiblePassword);
@@ -96,7 +96,7 @@ public class AudibleService : BrowserBase
     {
         if (!await Exist("#resend-transaction-approval")) return;
         Notifier.Display($"{_input.MailAccountAudible} Verification by email needed, we will wait 5 sec just in case");
-        await Task.Delay(5000);
+        await Task.Delay(10000);
         var p2 = p;
         p = await p.Context.NewPageAsync();
         await p.GotoAsync("https://cloud-e83ca2.managed-vps.net/webmail");
@@ -111,6 +111,7 @@ public class AudibleService : BrowserBase
             var key = await p.Locator("//div[@data-sitekey]").GetAttributeAsync("data-sitekey");
             Notifier.Display($"{_input.MailAccountAudible} Recaptcha detected : {key}");
             var response = await CaptchaService.SolveReCaptcha(key, _input.Proxy);
+            if (response.Equals("ERROR_KEY_DOES_NOT_EXIST")) throw new KnownException($"recaptcha ERROR_KEY_DOES_NOT_EXIST");
             await p.EvaluateAsync($"document.getElementById('g-recaptcha-response').innerHTML='{response}';");
             await p.EvaluateAsync("onSubmit();");
         }
@@ -123,16 +124,22 @@ public class AudibleService : BrowserBase
         // if (!await Exist("//a[text()=' Approve or Deny.']")) 
         //     throw new KnownException($"{_input.MailAccountAudible} Could not locate the approve link");
         var frame = p.FrameLocator("#messagecontframe");
-        var link = await frame.Locator("//a[text()=' Approve or Deny.']").GetAttributeAsync("href", new LocatorGetAttributeOptions() { Timeout = 15000 });
-        if (link == null) throw new KnownException($"{_input.MailAccountAudible} Failed to retrieve link from approved link node");
-        await Navigate(link);
-        await Click("//input[@name='customerResponseApproveButton']");
-        if (!await Exist("//span[text()='Thank you. Sign-in attempt was approved.']", 15000) &&
-            !await Exist("//span[text()='Grazie, Tentativo di accesso è stato approvato.']", 3000) &&
-            !await Exist("//a[contains(@href,'/signout')]", 3000))
-            throw new KnownException("Failed to approve the access");
-        Notifier.Log($"{_input.MailAccountAudible} Access approved");
+        var code = (await frame.Locator("//td[contains(@style,'background-color: #D3D3D3')]/p").TextContentAsync()).Trim();
+        // var link = await frame.Locator("//a[text()=' Approve or Deny.']").GetAttributeAsync("href", new LocatorGetAttributeOptions() { Timeout = 15000 });
+        // if (link == null) throw new KnownException($"{_input.MailAccountAudible} Failed to retrieve link from approved link node");
+        // await Navigate(link);
+        // await Click("//input[@name='customerResponseApproveButton']");
+        // if (!await Exist("//span[text()='Thank you. Sign-in attempt was approved.']", 15000) &&
+        //     !await Exist("//span[text()='Grazie, Tentativo di accesso è stato approvato.']", 3000) &&
+        //     !await Exist("//a[contains(@href,'/signout')]", 3000))
+        //     throw new KnownException("Failed to approve the access");
+        // Notifier.Log($"{_input.MailAccountAudible} Access approved");
         p = p2;
+        for (int i = 1; i < 7; i++)
+        {
+            await Fill($"//input[@name='otc-{i}']", code[i - 1].ToString());
+        }
+        await Click("//span[@id='cvf-submit-otp-button']");
     }
 
     private async Task Navigate(string url)
