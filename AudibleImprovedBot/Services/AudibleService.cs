@@ -401,7 +401,7 @@ public class AudibleService : BrowserBase
         try
         {
             // await StartContext(_browser, _input.Proxy);
-            await StartBrowser("temp", int.Parse(await File.ReadAllTextAsync("port.txt")), "https://api.ipify.org?format=json", _input.Proxy, true);
+            await StartBrowser("temp",Debugger.IsAttached ? 9288 : int.Parse(await File.ReadAllTextAsync("port.txt")), "https://api.ipify.org?format=json", _input.Proxy, true);
             //await GetContext(_browser); 
 
             await VerifyIp();
