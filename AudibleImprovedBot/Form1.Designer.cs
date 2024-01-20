@@ -28,547 +28,567 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.logT = new System.Windows.Forms.RichTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.displayT = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.startButton = new System.Windows.Forms.Button();
-            this.inputI = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.selectButton = new System.Windows.Forms.Button();
-            this.openFileButton = new System.Windows.Forms.Button();
-            this.twoCaptchaKeyI = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dateTimeI = new System.Windows.Forms.DateTimePicker();
-            this.runAtI = new System.Windows.Forms.CheckBox();
-            this.isRedeemLimitedI = new System.Windows.Forms.CheckBox();
-            this.redeemNumberI = new System.Windows.Forms.NumericUpDown();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.toProcessL = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.failedL = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.successL = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.totalEntriesL = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.threadsI = new System.Windows.Forms.NumericUpDown();
-            this.LoopI = new System.Windows.Forms.CheckBox();
-            this.SkipTheFailedI = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.starsCountI = new System.Windows.Forms.ComboBox();
-            this.loopFilesI = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.delayBetweenFilesI = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.delayI = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.testI = new System.Windows.Forms.CheckBox();
-            this.clearAllButton = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.redeemNumberI)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.threadsI)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.delayBetweenFilesI)).BeginInit();
-            this.panel4.SuspendLayout();
-            this.SuspendLayout();
+            logT = new RichTextBox();
+            panel1 = new Panel();
+            displayT = new Label();
+            panel3 = new Panel();
+            UpdateButton = new Button();
+            clearAllButton = new Button();
+            startButton = new Button();
+            inputI = new TextBox();
+            label1 = new Label();
+            selectButton = new Button();
+            openFileButton = new Button();
+            twoCaptchaKeyI = new TextBox();
+            label2 = new Label();
+            dateTimeI = new DateTimePicker();
+            runAtI = new CheckBox();
+            isRedeemLimitedI = new CheckBox();
+            redeemNumberI = new NumericUpDown();
+            panel2 = new Panel();
+            testI = new CheckBox();
+            toProcessL = new Label();
+            label14 = new Label();
+            failedL = new Label();
+            label12 = new Label();
+            successL = new Label();
+            label10 = new Label();
+            totalEntriesL = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            threadsI = new NumericUpDown();
+            LoopI = new CheckBox();
+            SkipTheFailedI = new CheckBox();
+            label6 = new Label();
+            starsCountI = new ComboBox();
+            loopFilesI = new CheckBox();
+            label5 = new Label();
+            label4 = new Label();
+            delayBetweenFilesI = new NumericUpDown();
+            label3 = new Label();
+            delayI = new ComboBox();
+            panel4 = new Panel();
+            label9 = new Label();
+            listenDurationI = new NumericUpDown();
+            forceStopI = new CheckBox();
+            panel1.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)redeemNumberI).BeginInit();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)threadsI).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)delayBetweenFilesI).BeginInit();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)listenDurationI).BeginInit();
+            SuspendLayout();
             // 
             // logT
             // 
-            this.logT.BackColor = System.Drawing.SystemColors.Control;
-            this.logT.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.logT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logT.Location = new System.Drawing.Point(20, 20);
-            this.logT.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.logT.Name = "logT";
-            this.logT.ReadOnly = true;
-            this.logT.Size = new System.Drawing.Size(1674, 405);
-            this.logT.TabIndex = 1;
-            this.logT.Text = "";
+            logT.BackColor = SystemColors.Control;
+            logT.BorderStyle = BorderStyle.None;
+            logT.Dock = DockStyle.Fill;
+            logT.Location = new Point(20, 20);
+            logT.Margin = new Padding(6);
+            logT.Name = "logT";
+            logT.ReadOnly = true;
+            logT.Size = new Size(1674, 405);
+            logT.TabIndex = 1;
+            logT.Text = "";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.displayT);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 910);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1694, 56);
-            this.panel1.TabIndex = 2;
+            panel1.Controls.Add(displayT);
+            panel1.Dock = DockStyle.Bottom;
+            panel1.Location = new Point(0, 910);
+            panel1.Margin = new Padding(2);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1694, 56);
+            panel1.TabIndex = 2;
             // 
             // displayT
             // 
-            this.displayT.AutoSize = true;
-            this.displayT.Location = new System.Drawing.Point(31, 15);
-            this.displayT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.displayT.Name = "displayT";
-            this.displayT.Size = new System.Drawing.Size(26, 25);
-            this.displayT.TabIndex = 0;
-            this.displayT.Text = "--";
+            displayT.AutoSize = true;
+            displayT.Location = new Point(31, 15);
+            displayT.Margin = new Padding(2, 0, 2, 0);
+            displayT.Name = "displayT";
+            displayT.Size = new Size(26, 25);
+            displayT.TabIndex = 0;
+            displayT.Text = "--";
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.clearAllButton);
-            this.panel3.Controls.Add(this.startButton);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(1394, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(300, 485);
-            this.panel3.TabIndex = 1;
-            // 
-            // startButton
-            // 
-            this.startButton.Location = new System.Drawing.Point(29, 410);
-            this.startButton.Margin = new System.Windows.Forms.Padding(2);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(259, 48);
-            this.startButton.TabIndex = 0;
-            this.startButton.Text = "start";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
-            // inputI
-            // 
-            this.inputI.Location = new System.Drawing.Point(161, 56);
-            this.inputI.Margin = new System.Windows.Forms.Padding(2);
-            this.inputI.Name = "inputI";
-            this.inputI.ReadOnly = true;
-            this.inputI.Size = new System.Drawing.Size(590, 31);
-            this.inputI.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 56);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 25);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Input File";
-            // 
-            // selectButton
-            // 
-            this.selectButton.Location = new System.Drawing.Point(772, 56);
-            this.selectButton.Margin = new System.Windows.Forms.Padding(2);
-            this.selectButton.Name = "selectButton";
-            this.selectButton.Size = new System.Drawing.Size(138, 34);
-            this.selectButton.TabIndex = 4;
-            this.selectButton.Text = "Select File";
-            this.selectButton.UseVisualStyleBackColor = true;
-            this.selectButton.Click += new System.EventHandler(this.selectButton_Click);
-            // 
-            // openFileButton
-            // 
-            this.openFileButton.Location = new System.Drawing.Point(916, 54);
-            this.openFileButton.Margin = new System.Windows.Forms.Padding(2);
-            this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(138, 34);
-            this.openFileButton.TabIndex = 5;
-            this.openFileButton.Text = "Open File";
-            this.openFileButton.UseVisualStyleBackColor = true;
-            this.openFileButton.Click += new System.EventHandler(this.openFileButton_Click);
-            // 
-            // twoCaptchaKeyI
-            // 
-            this.twoCaptchaKeyI.Location = new System.Drawing.Point(161, 118);
-            this.twoCaptchaKeyI.Margin = new System.Windows.Forms.Padding(2);
-            this.twoCaptchaKeyI.Name = "twoCaptchaKeyI";
-            this.twoCaptchaKeyI.Size = new System.Drawing.Size(590, 31);
-            this.twoCaptchaKeyI.TabIndex = 6;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 121);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 25);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "2Captcha Key";
-            // 
-            // dateTimeI
-            // 
-            this.dateTimeI.CustomFormat = "MM/dd/yyyy HH:mm:ss";
-            this.dateTimeI.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeI.Location = new System.Drawing.Point(161, 178);
-            this.dateTimeI.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimeI.Name = "dateTimeI";
-            this.dateTimeI.Size = new System.Drawing.Size(246, 31);
-            this.dateTimeI.TabIndex = 8;
-            // 
-            // runAtI
-            // 
-            this.runAtI.AutoSize = true;
-            this.runAtI.Location = new System.Drawing.Point(31, 182);
-            this.runAtI.Margin = new System.Windows.Forms.Padding(2);
-            this.runAtI.Name = "runAtI";
-            this.runAtI.Size = new System.Drawing.Size(92, 29);
-            this.runAtI.TabIndex = 9;
-            this.runAtI.Text = "Run At";
-            this.runAtI.UseVisualStyleBackColor = true;
-            // 
-            // isRedeemLimitedI
-            // 
-            this.isRedeemLimitedI.AutoSize = true;
-            this.isRedeemLimitedI.Location = new System.Drawing.Point(31, 238);
-            this.isRedeemLimitedI.Margin = new System.Windows.Forms.Padding(2);
-            this.isRedeemLimitedI.Name = "isRedeemLimitedI";
-            this.isRedeemLimitedI.Size = new System.Drawing.Size(172, 29);
-            this.isRedeemLimitedI.TabIndex = 10;
-            this.isRedeemLimitedI.Text = "Limit Redeem to ";
-            this.isRedeemLimitedI.UseVisualStyleBackColor = true;
-            // 
-            // redeemNumberI
-            // 
-            this.redeemNumberI.Location = new System.Drawing.Point(209, 238);
-            this.redeemNumberI.Margin = new System.Windows.Forms.Padding(2);
-            this.redeemNumberI.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.redeemNumberI.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.redeemNumberI.Name = "redeemNumberI";
-            this.redeemNumberI.Size = new System.Drawing.Size(92, 31);
-            this.redeemNumberI.TabIndex = 11;
-            this.redeemNumberI.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.testI);
-            this.panel2.Controls.Add(this.toProcessL);
-            this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.failedL);
-            this.panel2.Controls.Add(this.label12);
-            this.panel2.Controls.Add(this.successL);
-            this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.totalEntriesL);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.threadsI);
-            this.panel2.Controls.Add(this.LoopI);
-            this.panel2.Controls.Add(this.SkipTheFailedI);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.starsCountI);
-            this.panel2.Controls.Add(this.loopFilesI);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.delayBetweenFilesI);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.delayI);
-            this.panel2.Controls.Add(this.redeemNumberI);
-            this.panel2.Controls.Add(this.isRedeemLimitedI);
-            this.panel2.Controls.Add(this.runAtI);
-            this.panel2.Controls.Add(this.dateTimeI);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.twoCaptchaKeyI);
-            this.panel2.Controls.Add(this.openFileButton);
-            this.panel2.Controls.Add(this.selectButton);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.inputI);
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1694, 485);
-            this.panel2.TabIndex = 3;
-            // 
-            // toProcessL
-            // 
-            this.toProcessL.AutoSize = true;
-            this.toProcessL.Location = new System.Drawing.Point(751, 432);
-            this.toProcessL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.toProcessL.Name = "toProcessL";
-            this.toProcessL.Size = new System.Drawing.Size(0, 25);
-            this.toProcessL.TabIndex = 31;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(638, 432);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(104, 25);
-            this.label14.TabIndex = 30;
-            this.label14.Text = "To Process :";
-            // 
-            // failedL
-            // 
-            this.failedL.AutoSize = true;
-            this.failedL.Location = new System.Drawing.Point(534, 432);
-            this.failedL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.failedL.Name = "failedL";
-            this.failedL.Size = new System.Drawing.Size(0, 25);
-            this.failedL.TabIndex = 29;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(456, 432);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 25);
-            this.label12.TabIndex = 28;
-            this.label12.Text = "Failed :";
-            // 
-            // successL
-            // 
-            this.successL.AutoSize = true;
-            this.successL.Location = new System.Drawing.Point(378, 432);
-            this.successL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.successL.Name = "successL";
-            this.successL.Size = new System.Drawing.Size(0, 25);
-            this.successL.TabIndex = 27;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(288, 432);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(82, 25);
-            this.label10.TabIndex = 26;
-            this.label10.Text = "Success :";
-            // 
-            // totalEntriesL
-            // 
-            this.totalEntriesL.AutoSize = true;
-            this.totalEntriesL.Location = new System.Drawing.Point(246, 432);
-            this.totalEntriesL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.totalEntriesL.Name = "totalEntriesL";
-            this.totalEntriesL.Size = new System.Drawing.Size(0, 25);
-            this.totalEntriesL.TabIndex = 25;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(118, 432);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(115, 25);
-            this.label8.TabIndex = 24;
-            this.label8.Text = "Total Entries :";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(675, 180);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(74, 25);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "Threads";
-            // 
-            // threadsI
-            // 
-            this.threadsI.Location = new System.Drawing.Point(578, 178);
-            this.threadsI.Margin = new System.Windows.Forms.Padding(2);
-            this.threadsI.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.threadsI.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.threadsI.Name = "threadsI";
-            this.threadsI.Size = new System.Drawing.Size(92, 31);
-            this.threadsI.TabIndex = 22;
-            this.threadsI.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // LoopI
-            // 
-            this.LoopI.AutoSize = true;
-            this.LoopI.Location = new System.Drawing.Point(772, 364);
-            this.LoopI.Margin = new System.Windows.Forms.Padding(2);
-            this.LoopI.Name = "LoopI";
-            this.LoopI.Size = new System.Drawing.Size(305, 29);
-            this.LoopI.TabIndex = 21;
-            this.LoopI.Text = "Loop between entries of same file";
-            this.LoopI.UseVisualStyleBackColor = true;
-            // 
-            // SkipTheFailedI
-            // 
-            this.SkipTheFailedI.AutoSize = true;
-            this.SkipTheFailedI.Location = new System.Drawing.Point(456, 364);
-            this.SkipTheFailedI.Margin = new System.Windows.Forms.Padding(2);
-            this.SkipTheFailedI.Name = "SkipTheFailedI";
-            this.SkipTheFailedI.Size = new System.Drawing.Size(177, 29);
-            this.SkipTheFailedI.TabIndex = 20;
-            this.SkipTheFailedI.Text = "Skip failed entries";
-            this.SkipTheFailedI.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(31, 368);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 25);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Stars#";
-            // 
-            // starsCountI
-            // 
-            this.starsCountI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.starsCountI.FormattingEnabled = true;
-            this.starsCountI.Items.AddRange(new object[] {
-            "Random 4-5",
-            "5"});
-            this.starsCountI.Location = new System.Drawing.Point(118, 365);
-            this.starsCountI.Margin = new System.Windows.Forms.Padding(2);
-            this.starsCountI.Name = "starsCountI";
-            this.starsCountI.Size = new System.Drawing.Size(244, 33);
-            this.starsCountI.TabIndex = 18;
-            // 
-            // loopFilesI
-            // 
-            this.loopFilesI.AutoSize = true;
-            this.loopFilesI.Location = new System.Drawing.Point(772, 305);
-            this.loopFilesI.Margin = new System.Windows.Forms.Padding(2);
-            this.loopFilesI.Name = "loopFilesI";
-            this.loopFilesI.Size = new System.Drawing.Size(187, 29);
-            this.loopFilesI.TabIndex = 17;
-            this.loopFilesI.Text = "Loop between files";
-            this.loopFilesI.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(554, 309);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(168, 25);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Hours between files";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(308, 239);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(221, 25);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Promotion Codes next run";
-            // 
-            // delayBetweenFilesI
-            // 
-            this.delayBetweenFilesI.Location = new System.Drawing.Point(456, 308);
-            this.delayBetweenFilesI.Margin = new System.Windows.Forms.Padding(2);
-            this.delayBetweenFilesI.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.delayBetweenFilesI.Name = "delayBetweenFilesI";
-            this.delayBetweenFilesI.Size = new System.Drawing.Size(92, 31);
-            this.delayBetweenFilesI.TabIndex = 14;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 306);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 25);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Delay";
-            // 
-            // delayI
-            // 
-            this.delayI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.delayI.FormattingEnabled = true;
-            this.delayI.Items.AddRange(new object[] {
-            "No Delay",
-            "5 min",
-            "10 min",
-            "20 min",
-            "30 min",
-            "40 min",
-            "60 min"});
-            this.delayI.Location = new System.Drawing.Point(118, 306);
-            this.delayI.Margin = new System.Windows.Forms.Padding(2);
-            this.delayI.Name = "delayI";
-            this.delayI.Size = new System.Drawing.Size(244, 33);
-            this.delayI.TabIndex = 12;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.logT);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 485);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2);
-            this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(20, 20, 0, 0);
-            this.panel4.Size = new System.Drawing.Size(1694, 425);
-            this.panel4.TabIndex = 4;
-            // 
-            // testI
-            // 
-            this.testI.AutoSize = true;
-            this.testI.Location = new System.Drawing.Point(1322, 52);
-            this.testI.Margin = new System.Windows.Forms.Padding(2);
-            this.testI.Name = "testI";
-            this.testI.Size = new System.Drawing.Size(68, 29);
-            this.testI.TabIndex = 32;
-            this.testI.Text = "Test";
-            this.testI.UseVisualStyleBackColor = true;
+            panel3.Controls.Add(UpdateButton);
+            panel3.Controls.Add(clearAllButton);
+            panel3.Controls.Add(startButton);
+            panel3.Dock = DockStyle.Right;
+            panel3.ForeColor = SystemColors.ActiveCaptionText;
+            panel3.Location = new Point(1394, 0);
+            panel3.Margin = new Padding(2);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(300, 485);
+            panel3.TabIndex = 1;
+            // 
+            // UpdateButton
+            // 
+            UpdateButton.BackColor = Color.FromArgb(192, 192, 255);
+            UpdateButton.FlatStyle = FlatStyle.Flat;
+            UpdateButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            UpdateButton.ForeColor = Color.Red;
+            UpdateButton.Location = new Point(11, 47);
+            UpdateButton.Name = "UpdateButton";
+            UpdateButton.Size = new Size(259, 46);
+            UpdateButton.TabIndex = 2;
+            UpdateButton.Text = "Update";
+            UpdateButton.UseVisualStyleBackColor = false;
+            UpdateButton.Visible = false;
+            UpdateButton.Click += UpdateButton_Click;
             // 
             // clearAllButton
             // 
-            this.clearAllButton.Location = new System.Drawing.Point(11, 44);
-            this.clearAllButton.Margin = new System.Windows.Forms.Padding(2);
-            this.clearAllButton.Name = "clearAllButton";
-            this.clearAllButton.Size = new System.Drawing.Size(259, 48);
-            this.clearAllButton.TabIndex = 1;
-            this.clearAllButton.Text = "Clear all results";
-            this.clearAllButton.UseVisualStyleBackColor = true;
-            this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
+            clearAllButton.Location = new Point(11, 98);
+            clearAllButton.Margin = new Padding(2);
+            clearAllButton.Name = "clearAllButton";
+            clearAllButton.Size = new Size(259, 48);
+            clearAllButton.TabIndex = 1;
+            clearAllButton.Text = "Clear all results";
+            clearAllButton.UseVisualStyleBackColor = true;
+            clearAllButton.Click += clearAllButton_Click;
+            // 
+            // startButton
+            // 
+            startButton.Location = new Point(11, 410);
+            startButton.Margin = new Padding(2);
+            startButton.Name = "startButton";
+            startButton.Size = new Size(259, 48);
+            startButton.TabIndex = 0;
+            startButton.Text = "start";
+            startButton.UseVisualStyleBackColor = true;
+            startButton.Click += startButton_Click;
+            // 
+            // inputI
+            // 
+            inputI.Location = new Point(161, 56);
+            inputI.Margin = new Padding(2);
+            inputI.Name = "inputI";
+            inputI.ReadOnly = true;
+            inputI.Size = new Size(590, 31);
+            inputI.TabIndex = 2;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(31, 56);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(85, 25);
+            label1.TabIndex = 3;
+            label1.Text = "Input File";
+            // 
+            // selectButton
+            // 
+            selectButton.Location = new Point(772, 56);
+            selectButton.Margin = new Padding(2);
+            selectButton.Name = "selectButton";
+            selectButton.Size = new Size(138, 34);
+            selectButton.TabIndex = 4;
+            selectButton.Text = "Select File";
+            selectButton.UseVisualStyleBackColor = true;
+            selectButton.Click += selectButton_Click;
+            // 
+            // openFileButton
+            // 
+            openFileButton.Location = new Point(916, 54);
+            openFileButton.Margin = new Padding(2);
+            openFileButton.Name = "openFileButton";
+            openFileButton.Size = new Size(138, 34);
+            openFileButton.TabIndex = 5;
+            openFileButton.Text = "Open File";
+            openFileButton.UseVisualStyleBackColor = true;
+            openFileButton.Click += openFileButton_Click;
+            // 
+            // twoCaptchaKeyI
+            // 
+            twoCaptchaKeyI.Location = new Point(161, 118);
+            twoCaptchaKeyI.Margin = new Padding(2);
+            twoCaptchaKeyI.Name = "twoCaptchaKeyI";
+            twoCaptchaKeyI.Size = new Size(590, 31);
+            twoCaptchaKeyI.TabIndex = 6;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(31, 121);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(119, 25);
+            label2.TabIndex = 7;
+            label2.Text = "2Captcha Key";
+            // 
+            // dateTimeI
+            // 
+            dateTimeI.CustomFormat = "MM/dd/yyyy HH:mm:ss";
+            dateTimeI.Format = DateTimePickerFormat.Custom;
+            dateTimeI.Location = new Point(161, 178);
+            dateTimeI.Margin = new Padding(2);
+            dateTimeI.Name = "dateTimeI";
+            dateTimeI.Size = new Size(246, 31);
+            dateTimeI.TabIndex = 8;
+            // 
+            // runAtI
+            // 
+            runAtI.AutoSize = true;
+            runAtI.Location = new Point(31, 182);
+            runAtI.Margin = new Padding(2);
+            runAtI.Name = "runAtI";
+            runAtI.Size = new Size(92, 29);
+            runAtI.TabIndex = 9;
+            runAtI.Text = "Run At";
+            runAtI.UseVisualStyleBackColor = true;
+            // 
+            // isRedeemLimitedI
+            // 
+            isRedeemLimitedI.AutoSize = true;
+            isRedeemLimitedI.Location = new Point(31, 238);
+            isRedeemLimitedI.Margin = new Padding(2);
+            isRedeemLimitedI.Name = "isRedeemLimitedI";
+            isRedeemLimitedI.Size = new Size(172, 29);
+            isRedeemLimitedI.TabIndex = 10;
+            isRedeemLimitedI.Text = "Limit Redeem to ";
+            isRedeemLimitedI.UseVisualStyleBackColor = true;
+            // 
+            // redeemNumberI
+            // 
+            redeemNumberI.Location = new Point(209, 238);
+            redeemNumberI.Margin = new Padding(2);
+            redeemNumberI.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            redeemNumberI.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            redeemNumberI.Name = "redeemNumberI";
+            redeemNumberI.Size = new Size(92, 31);
+            redeemNumberI.TabIndex = 11;
+            redeemNumberI.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(label9);
+            panel2.Controls.Add(listenDurationI);
+            panel2.Controls.Add(forceStopI);
+            panel2.Controls.Add(testI);
+            panel2.Controls.Add(toProcessL);
+            panel2.Controls.Add(label14);
+            panel2.Controls.Add(failedL);
+            panel2.Controls.Add(label12);
+            panel2.Controls.Add(successL);
+            panel2.Controls.Add(label10);
+            panel2.Controls.Add(totalEntriesL);
+            panel2.Controls.Add(label8);
+            panel2.Controls.Add(label7);
+            panel2.Controls.Add(threadsI);
+            panel2.Controls.Add(LoopI);
+            panel2.Controls.Add(SkipTheFailedI);
+            panel2.Controls.Add(label6);
+            panel2.Controls.Add(starsCountI);
+            panel2.Controls.Add(loopFilesI);
+            panel2.Controls.Add(label5);
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(delayBetweenFilesI);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(delayI);
+            panel2.Controls.Add(redeemNumberI);
+            panel2.Controls.Add(isRedeemLimitedI);
+            panel2.Controls.Add(runAtI);
+            panel2.Controls.Add(dateTimeI);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(twoCaptchaKeyI);
+            panel2.Controls.Add(openFileButton);
+            panel2.Controls.Add(selectButton);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(inputI);
+            panel2.Controls.Add(panel3);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(2);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1694, 485);
+            panel2.TabIndex = 3;
+            // 
+            // testI
+            // 
+            testI.AutoSize = true;
+            testI.Location = new Point(1322, 52);
+            testI.Margin = new Padding(2);
+            testI.Name = "testI";
+            testI.Size = new Size(68, 29);
+            testI.TabIndex = 32;
+            testI.Text = "Test";
+            testI.UseVisualStyleBackColor = true;
+            // 
+            // toProcessL
+            // 
+            toProcessL.AutoSize = true;
+            toProcessL.Location = new Point(751, 432);
+            toProcessL.Margin = new Padding(4, 0, 4, 0);
+            toProcessL.Name = "toProcessL";
+            toProcessL.Size = new Size(0, 25);
+            toProcessL.TabIndex = 31;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(638, 432);
+            label14.Margin = new Padding(4, 0, 4, 0);
+            label14.Name = "label14";
+            label14.Size = new Size(104, 25);
+            label14.TabIndex = 30;
+            label14.Text = "To Process :";
+            // 
+            // failedL
+            // 
+            failedL.AutoSize = true;
+            failedL.Location = new Point(534, 432);
+            failedL.Margin = new Padding(4, 0, 4, 0);
+            failedL.Name = "failedL";
+            failedL.Size = new Size(0, 25);
+            failedL.TabIndex = 29;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(456, 432);
+            label12.Margin = new Padding(4, 0, 4, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(66, 25);
+            label12.TabIndex = 28;
+            label12.Text = "Failed :";
+            // 
+            // successL
+            // 
+            successL.AutoSize = true;
+            successL.Location = new Point(378, 432);
+            successL.Margin = new Padding(4, 0, 4, 0);
+            successL.Name = "successL";
+            successL.Size = new Size(0, 25);
+            successL.TabIndex = 27;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(288, 432);
+            label10.Margin = new Padding(4, 0, 4, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(82, 25);
+            label10.TabIndex = 26;
+            label10.Text = "Success :";
+            // 
+            // totalEntriesL
+            // 
+            totalEntriesL.AutoSize = true;
+            totalEntriesL.Location = new Point(246, 432);
+            totalEntriesL.Margin = new Padding(4, 0, 4, 0);
+            totalEntriesL.Name = "totalEntriesL";
+            totalEntriesL.Size = new Size(0, 25);
+            totalEntriesL.TabIndex = 25;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(118, 432);
+            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(115, 25);
+            label8.TabIndex = 24;
+            label8.Text = "Total Entries :";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(675, 180);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(74, 25);
+            label7.TabIndex = 23;
+            label7.Text = "Threads";
+            // 
+            // threadsI
+            // 
+            threadsI.Location = new Point(578, 178);
+            threadsI.Margin = new Padding(2);
+            threadsI.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
+            threadsI.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            threadsI.Name = "threadsI";
+            threadsI.Size = new Size(92, 31);
+            threadsI.TabIndex = 22;
+            threadsI.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // LoopI
+            // 
+            LoopI.AutoSize = true;
+            LoopI.Location = new Point(772, 364);
+            LoopI.Margin = new Padding(2);
+            LoopI.Name = "LoopI";
+            LoopI.Size = new Size(305, 29);
+            LoopI.TabIndex = 21;
+            LoopI.Text = "Loop between entries of same file";
+            LoopI.UseVisualStyleBackColor = true;
+            // 
+            // SkipTheFailedI
+            // 
+            SkipTheFailedI.AutoSize = true;
+            SkipTheFailedI.Location = new Point(456, 364);
+            SkipTheFailedI.Margin = new Padding(2);
+            SkipTheFailedI.Name = "SkipTheFailedI";
+            SkipTheFailedI.Size = new Size(177, 29);
+            SkipTheFailedI.TabIndex = 20;
+            SkipTheFailedI.Text = "Skip failed entries";
+            SkipTheFailedI.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(31, 368);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(61, 25);
+            label6.TabIndex = 19;
+            label6.Text = "Stars#";
+            // 
+            // starsCountI
+            // 
+            starsCountI.DropDownStyle = ComboBoxStyle.DropDownList;
+            starsCountI.FormattingEnabled = true;
+            starsCountI.Items.AddRange(new object[] { "Random 4-5", "5" });
+            starsCountI.Location = new Point(118, 365);
+            starsCountI.Margin = new Padding(2);
+            starsCountI.Name = "starsCountI";
+            starsCountI.Size = new Size(244, 33);
+            starsCountI.TabIndex = 18;
+            // 
+            // loopFilesI
+            // 
+            loopFilesI.AutoSize = true;
+            loopFilesI.Location = new Point(772, 305);
+            loopFilesI.Margin = new Padding(2);
+            loopFilesI.Name = "loopFilesI";
+            loopFilesI.Size = new Size(187, 29);
+            loopFilesI.TabIndex = 17;
+            loopFilesI.Text = "Loop between files";
+            loopFilesI.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(554, 309);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(168, 25);
+            label5.TabIndex = 16;
+            label5.Text = "Hours between files";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(308, 239);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(221, 25);
+            label4.TabIndex = 15;
+            label4.Text = "Promotion Codes next run";
+            // 
+            // delayBetweenFilesI
+            // 
+            delayBetweenFilesI.Location = new Point(456, 308);
+            delayBetweenFilesI.Margin = new Padding(2);
+            delayBetweenFilesI.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            delayBetweenFilesI.Name = "delayBetweenFilesI";
+            delayBetweenFilesI.Size = new Size(92, 31);
+            delayBetweenFilesI.TabIndex = 14;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(31, 306);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(56, 25);
+            label3.TabIndex = 13;
+            label3.Text = "Delay";
+            // 
+            // delayI
+            // 
+            delayI.DropDownStyle = ComboBoxStyle.DropDownList;
+            delayI.FormattingEnabled = true;
+            delayI.Items.AddRange(new object[] { "No Delay", "5 min", "10 min", "20 min", "30 min", "40 min", "60 min" });
+            delayI.Location = new Point(118, 306);
+            delayI.Margin = new Padding(2);
+            delayI.Name = "delayI";
+            delayI.Size = new Size(244, 33);
+            delayI.TabIndex = 12;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(logT);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(0, 485);
+            panel4.Margin = new Padding(2);
+            panel4.Name = "panel4";
+            panel4.Padding = new Padding(20, 20, 0, 0);
+            panel4.Size = new Size(1694, 425);
+            panel4.TabIndex = 4;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(856, 236);
+            label9.Margin = new Padding(2, 0, 2, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(75, 25);
+            label9.TabIndex = 35;
+            label9.Text = "Minutes";
+            // 
+            // listenDurationI
+            // 
+            listenDurationI.Location = new Point(757, 235);
+            listenDurationI.Margin = new Padding(2);
+            listenDurationI.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            listenDurationI.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            listenDurationI.Name = "listenDurationI";
+            listenDurationI.Size = new Size(92, 31);
+            listenDurationI.TabIndex = 34;
+            listenDurationI.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // forceStopI
+            // 
+            forceStopI.AutoSize = true;
+            forceStopI.Location = new Point(579, 235);
+            forceStopI.Margin = new Padding(2);
+            forceStopI.Name = "forceStopI";
+            forceStopI.Size = new Size(162, 29);
+            forceStopI.TabIndex = 33;
+            forceStopI.Text = "Stop listen after";
+            forceStopI.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1694, 966);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Form1";
-            this.Text = "AudibleImprovedBot 1.13";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.redeemNumberI)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.threadsI)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.delayBetweenFilesI)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1694, 966);
+            Controls.Add(panel4);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Margin = new Padding(2);
+            Name = "Form1";
+            Text = "AudibleImprovedBot 1.14";
+            FormClosing += Form1_FormClosing;
+            Load += Form1_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)redeemNumberI).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)threadsI).EndInit();
+            ((System.ComponentModel.ISupportInitialize)delayBetweenFilesI).EndInit();
+            panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)listenDurationI).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -611,5 +631,9 @@
         private Label label8;
         private Button clearAllButton;
         private CheckBox testI;
+        private Button UpdateButton;
+        private Label label9;
+        private NumericUpDown listenDurationI;
+        private CheckBox forceStopI;
     }
 }

@@ -290,6 +290,7 @@ public class AudibleService : BrowserBase
         Notifier.Log($"Last chapter : {lastChapter}");
         bool weAreOnLastChapter = false;
         string last = null;
+        var started=DateTime.Now;
         do
         {
             var chapterTitle = await Text("//span[@id='cp-Top-chapter-display']");
@@ -304,7 +305,13 @@ public class AudibleService : BrowserBase
                 p = p2;
                 break;
             }
-
+            if (_config.StopListen && (DateTime.Now-started).TotalMinutes>_config.ListenDuration)
+            {
+                Notifier.Log($"{_input.MailAccountAudible} we will stop listening because we listened for {_config.ListenDuration} min");
+                await p.CloseAsync();
+                p = p2;
+                break;
+            }
             last = timeLeft;
         } while (true);
     }

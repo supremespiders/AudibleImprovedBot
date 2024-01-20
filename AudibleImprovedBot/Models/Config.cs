@@ -17,4 +17,6 @@ public class Config
     public bool DoLoopFiles { get; set; }
     public bool SkipFailedEntries { get; set; }
     public bool Test { get; set; }
+    public bool StopListen { get; set; }
+    public int ListenDuration { get; set; }
 }

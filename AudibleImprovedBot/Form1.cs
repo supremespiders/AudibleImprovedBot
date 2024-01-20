@@ -2,9 +2,11 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using airbnb.comLister.Models;
+using AudibleImprovedBot.Extensions;
 using AudibleImprovedBot.Models;
 using AudibleImprovedBot.Services;
 using Newtonsoft.Json;
+using Updater7;
 
 namespace AudibleImprovedBot
 {
@@ -38,7 +40,9 @@ namespace AudibleImprovedBot
                 HoursBetweenFiles = (int)delayBetweenFilesI.Value,
                 SkipFailedEntries = SkipTheFailedI.Checked,
                 MaxThreads = (int)threadsI.Value,
-                Test = testI.Checked
+                Test = testI.Checked,
+                StopListen=forceStopI.Checked,
+                ListenDuration= (int)listenDurationI.Value,
             };
             try
             {
@@ -211,7 +215,7 @@ namespace AudibleImprovedBot
             }
             catch (Exception ex)
             {
-             MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -258,6 +262,23 @@ namespace AudibleImprovedBot
             MessageBox.Show((e.ExceptionObject as Exception)?.ToString(), @"Unhandled UI Exception");
         }
 
+        private async Task CheckForUpdate()
+        {
+            try
+            {
+                var dropboxClient = new DropboxClient();
+                var l = await File.ReadAllTextAsync("UpdaterConfig.json");
+                var p = l.StringBetween("\"RemotePath\":\"", "\"");
+                var y = await dropboxClient.IsThereAnUpdate(p, _path);
+                if (y == 0) return;
+                UpdateButton.Visible = true;
+            }
+            catch (Exception e)
+            {
+                ErrorLog(e.ToString());
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             ServicePointManager.DefaultConnectionLimit = 65000;
@@ -272,6 +293,7 @@ namespace AudibleImprovedBot
             Notifier.OnError += OnError;
             _scraper.OnStaticChange += OnStaticChange;
             LoadConfig();
+            _ = CheckForUpdate();
         }
 
         private void OnStaticChange(object sender, Static e)
@@ -323,7 +345,7 @@ namespace AudibleImprovedBot
             }
             catch (Exception exception)
             {
-               ErrorLog(exception.ToString());
+                ErrorLog(exception.ToString());
             }
         }
 
@@ -360,6 +382,30 @@ namespace AudibleImprovedBot
             {
                 ErrorLog(ex.ToString());
                 Display(ex.Message);
+            }
+        }
+
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+            var p = $"{_path}/Updater7.exe";
+            try
+            {
+                if (!File.Exists(p))
+                {
+                    NormalLog("Failed to find Updater7.exe");
+                    return;
+                }
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = $"{_path}/Updater7.exe",
+                    UseShellExecute = true
+                });
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorLog(ex.ToString());
             }
         }
     }
