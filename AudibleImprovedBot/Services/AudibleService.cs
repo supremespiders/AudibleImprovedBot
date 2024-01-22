@@ -310,6 +310,14 @@ public class AudibleService : BrowserBase
                 Notifier.Log($"{_input.MailAccountAudible} we will stop listening because we listened for {_config.ListenDuration} min");
                 await p.CloseAsync();
                 p = p2;
+                Notifier.Log($"Refreshing the page 3 times..");
+                await p.ReloadAsync();
+                await Task.Delay(3000);
+                await p.ReloadAsync();
+                await Task.Delay(3000);
+                await p.ReloadAsync();
+                await Task.Delay(3000);
+                Notifier.Log($"Refreshing completed, i hope it works :)");
                 break;
             }
             last = timeLeft;
