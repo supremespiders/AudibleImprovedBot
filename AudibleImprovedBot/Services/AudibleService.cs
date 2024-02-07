@@ -45,9 +45,13 @@ public class AudibleService : BrowserBase
         await Click("//*[@id='truste-consent-button']", 3000, true);
         await Click("//a[@id='att_lightbox_close']", 1000, true);
         // await Task.Delay(10000);
-        await Click("//a[contains(text(),'Sign in')]", 30000);
+        await Click("//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'sign in')]", 30000);
         await SolveImageCaptchaIfNeeded();
         await Fill("//input[@id='ap_email']", _input.MailAccountAudible, 30000);
+        if (!await Exist("//input[@id='ap_password']", 2000))
+        {
+            await Click("(//input[@id='continue'])[1]");
+        }
         await Fill("//input[@id='ap_password']", _input.AudiblePassword);
         await Click("//input[@id='signInSubmit']", 60000);
         if (await Exist("(//*[@id='auth-error-message-box'])[1]"))
@@ -312,11 +316,11 @@ public class AudibleService : BrowserBase
                 p = p2;
                 Notifier.Log($"Refreshing the page 3 times..");
                 await p.ReloadAsync();
-                await Task.Delay(3000);
+                await Task.Delay(10000);
                 await p.ReloadAsync();
-                await Task.Delay(3000);
+                await Task.Delay(10000);
                 await p.ReloadAsync();
-                await Task.Delay(3000);
+                await Task.Delay(10000);
                 Notifier.Log($"Refreshing completed, i hope it works :)");
                 break;
             }
