@@ -7,7 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6df420c9-d3c0-4294-8fd0-b395a0f49131" name="Changes" comment="handle uk tweaks" />
+    <list default="true" id="6df420c9-d3c0-4294-8fd0-b395a0f49131" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AudibleImprovedBot/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AudibleImprovedBot/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AudibleImprovedBot/Services/AudibleService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AudibleImprovedBot/Services/AudibleService.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +99,10 @@
       <workItem from="1705953408293" duration="1600000" />
       <workItem from="1706782077585" duration="150000" />
       <workItem from="1707045381400" duration="1740000" />
-      <workItem from="1707333002317" duration="1572000" />
+      <workItem from="1707333002317" duration="2187000" />
+      <workItem from="1707933615496" duration="1316000" />
+      <workItem from="1708107741078" duration="1107000" />
+      <workItem from="1708237144493" duration="307000" />
     </task>
     <task id="LOCAL-00001" summary=".net 8">
       <option name="closed" value="true" />
@@ -138,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707334268593</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added workspace">
+      <option name="closed" value="true" />
+      <created>1707335949447</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1707335949447</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,6 +177,7 @@
     <MESSAGE value="1.14 auto update plus listen config" />
     <MESSAGE value="refresh 3 times" />
     <MESSAGE value="handle uk tweaks" />
-    <option name="LAST_COMMIT_MESSAGE" value="handle uk tweaks" />
+    <MESSAGE value="added workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="added workspace" />
   </component>
 </project>

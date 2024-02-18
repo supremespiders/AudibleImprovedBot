@@ -260,7 +260,7 @@ public class AudibleService : BrowserBase
 
     private async Task ListenToBook()
     {
-        if (!await Exist($"//div[@id='adbl-library-content-row-{_input.Asin}']")) throw new KnownException($"{_input.MailAccountAudible} Failed to lookup the book");
+        if (!await Exist($"//div[@id='adbl-library-content-row-{_input.Asin}']",15000)) throw new KnownException($"{_input.MailAccountAudible} Failed to lookup the book");
         var reviewLinkS = $"//div[@id='adbl-library-content-row-{_input.Asin}']//a[contains(@href,'/write-review?')]";
         if (await Exist(reviewLinkS, 1000))
         {
@@ -406,7 +406,7 @@ public class AudibleService : BrowserBase
 
     public async Task<bool> Work()
     {
-        //if (_input.MailAccountAudible != "CruzJNelson@topreadersstudio.com") return false;
+        //if (_input.MailAccountAudible != "BarbaraAWarkentin@thxcompany.com") return false;
         if (_config.Test)
         {
             Notifier.Log($"{_input.MailAccountAudible} start working");
@@ -420,7 +420,8 @@ public class AudibleService : BrowserBase
         try
         {
             // await StartContext(_browser, _input.Proxy);
-            await StartBrowser("temp",Debugger.IsAttached ? 9288 : int.Parse(await File.ReadAllTextAsync("port.txt")), "https://api.ipify.org?format=json", _input.Proxy, true);
+            await StartBrowser("temp",Debugger.IsAttached ? 9288 : int.Parse(await File.ReadAllTextAsync("port.txt")), "https://api.ipify.org?format=json", _input.Proxy, false);
+            await p.Context.ClearCookiesAsync();
             //await GetContext(_browser); 
 
             await VerifyIp();
