@@ -575,7 +575,7 @@
             Controls.Add(panel1);
             Margin = new Padding(2);
             Name = "Form1";
-            Text = "AudibleImprovedBot 1.15";
+            Text = "AudibleImprovedBot 1.16";
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             panel1.ResumeLayout(false);

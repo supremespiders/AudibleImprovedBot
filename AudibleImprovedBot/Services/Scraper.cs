@@ -1,4 +1,5 @@
-﻿using airbnb.comLister.Models;
+﻿using System.Diagnostics;
+using airbnb.comLister.Models;
 using AudibleImprovedBot.Models;
 using ExcelHelperExe;
 using Microsoft.Playwright;
@@ -171,6 +172,11 @@ public class Scraper
     async Task<(int success, int fails)> ParallelWork(int targetSuccess)
     {
         _inputs = _currentFile.ReadFromExcel<Input>();
+        if (Debugger.IsAttached)
+        {
+            _inputs = _inputs.Take(1).ToList();
+            _inputs.First().Result = "";
+        }
         //var inputs = _inputs.Skip(6).Take(3).ToList();
         var threads = _config.MaxThreads;
         if (_config.DoLimitRedeem && targetSuccess < threads)

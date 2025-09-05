@@ -8,19 +8,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6df420c9-d3c0-4294-8fd0-b395a0f49131" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/AudibleImprovedBot/Services/Global.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AudibleImprovedBot/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AudibleImprovedBot/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AudibleImprovedBot/AudibleImprovedBot.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/AudibleImprovedBot/AudibleImprovedBot.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AudibleImprovedBot/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AudibleImprovedBot/Form1.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AudibleImprovedBot/Services/AudibleService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AudibleImprovedBot/Services/AudibleService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AudibleImprovedBot/Services/BrowserBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AudibleImprovedBot/Services/BrowserBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AudibleImprovedBot/Services/Scraper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AudibleImprovedBot/Services/Scraper.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;supremespiders&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/supremespiders/AudibleImprovedBot.git&quot;,
+    &quot;accountId&quot;: &quot;d1b3bb5e-a638-4707-814f-1a4394920663&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://R:/CSharp/AudibleImprovedBot/AudibleImprovedBot/Services/AudibleService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/59d3a2fefd58f565ee6e439e1597f4d9ca48f07f9acb2b472acca73fa6cf2c/PageGotoOptions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AudibleImprovedBot/Form1.Designer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AudibleImprovedBot/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AudibleImprovedBot/Services/AudibleService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AudibleImprovedBot/Services/BrowserBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AudibleImprovedBot/Services/CaptchaService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AudibleImprovedBot/Services/Global.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AudibleImprovedBot/Services/Scraper.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -30,7 +57,6 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2b3IeswsouStFWXEm3KgBe5OSqo" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -41,6 +67,7 @@
     &quot;Publish to folder.Publish AudibleImprovedBot to folder.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -49,18 +76,15 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Riadh\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Riadh\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Riadh\\AppData\\Local\\Symbols\\src&quot;
-    ]
   }
 }</component>
-  <component name="RunManager" selected="Publish to folder.Publish AudibleImprovedBot to folder">
+  <component name="RunManager" selected=".NET Project.AudibleImprovedBot">
     <configuration name="Publish AudibleImprovedBot to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
-      <riderPublish configuration="Debug" platform="Any CPU" runtime="win-x64" target_folder="$USER_HOME$/Dropbox/AudibleImprovedBot" target_framework="net8.0-windows" uuid_high="-1360277227747194956" uuid_low="-6041707405099574280" />
+      <riderPublish configuration="Debug" platform="Any CPU" target_folder="$USER_HOME$/Dropbox/AudibleImprovedBot" target_framework="net8.0-windows" uuid_high="-1360277227747194956" uuid_low="-6041707405099574280">
+        <runtimes>
+          <item value="win-x64" />
+        </runtimes>
+      </riderPublish>
       <method v="2" />
     </configuration>
     <configuration name="AudibleImprovedBot" type="DotNetProject" factoryName=".NET Project">
@@ -69,8 +93,13 @@
       <option name="WORKING_DIRECTORY" value="" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="AUTO_ATTACH_CHILDREN" value="0" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/AudibleImprovedBot/AudibleImprovedBot.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
@@ -102,7 +131,25 @@
       <workItem from="1707333002317" duration="2187000" />
       <workItem from="1707933615496" duration="1316000" />
       <workItem from="1708107741078" duration="1107000" />
-      <workItem from="1708237144493" duration="307000" />
+      <workItem from="1708237144493" duration="1547000" />
+      <workItem from="1708354514515" duration="607000" />
+      <workItem from="1708369166136" duration="1442000" />
+      <workItem from="1708863164859" duration="1628000" />
+      <workItem from="1750961664910" duration="1359000" />
+      <workItem from="1751017315600" duration="2990000" />
+      <workItem from="1751271649529" duration="654000" />
+      <workItem from="1751298354378" duration="605000" />
+      <workItem from="1751367176947" duration="1370000" />
+      <workItem from="1751703798210" duration="3811000" />
+      <workItem from="1751714180625" duration="788000" />
+      <workItem from="1751967222944" duration="2812000" />
+      <workItem from="1752006831551" duration="711000" />
+      <workItem from="1753090795117" duration="1229000" />
+      <workItem from="1754992671553" duration="1270000" />
+      <workItem from="1755594598461" duration="50000" />
+      <workItem from="1756241584706" duration="996000" />
+      <workItem from="1757063206096" duration="1088000" />
+      <workItem from="1757064325336" duration="9795000" />
     </task>
     <task id="LOCAL-00001" summary=".net 8">
       <option name="closed" value="true" />
@@ -152,13 +199,22 @@
       <option name="project" value="LOCAL" />
       <updated>1707335949447</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="1.15">
+      <option name="closed" value="true" />
+      <created>1708237624568</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708237624568</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -178,6 +234,25 @@
     <MESSAGE value="refresh 3 times" />
     <MESSAGE value="handle uk tweaks" />
     <MESSAGE value="added workspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="added workspace" />
+    <MESSAGE value="1.15" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.15" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
